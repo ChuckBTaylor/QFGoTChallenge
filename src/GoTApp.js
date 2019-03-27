@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './assets/stylesheets/app.scss';
 import CharacterContainer from './containers/characterContainer'
+import BookContainer from './containers/bookContainer';
 
 class GoTApp extends Component {
   
@@ -8,6 +9,7 @@ class GoTApp extends Component {
     return (
       <div className="App">
         <CharacterContainer />
+        <BookContainer />
       </div>
     );
   }
