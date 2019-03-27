@@ -2,7 +2,8 @@ import React from 'react';
 
 const CallApiButton = props => {
   const handleClick = () => {
-    console.log("Clicked!");
+    props.onClick();
+    
   }
 
   return(
