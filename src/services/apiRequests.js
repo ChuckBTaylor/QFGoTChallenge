@@ -22,9 +22,7 @@ export default function () {
     },
 
     characters: {
-      fetchAll: request => {
-        console.log("From services");
-        
+      fetchAll: request => {        
         let method = "get";
         let url = API_ROOT + "/characters";
         return axios({

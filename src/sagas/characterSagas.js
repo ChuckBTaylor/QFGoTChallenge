@@ -1,7 +1,6 @@
-import { takeEvery } from 'redux-saga/effects';
 import apiRequests  from '../services/apiRequests';
 import { characterActions } from '../constants/constants';
-import { call, put } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
 function* fetchCharacters() {
   try {
@@ -13,6 +12,6 @@ function* fetchCharacters() {
   }
 }
 
-export function* characterRootSaga(){
+export function* characterSagas(){
   yield takeEvery(characterActions.CHARACTERS_FETCH_START, fetchCharacters);
 }

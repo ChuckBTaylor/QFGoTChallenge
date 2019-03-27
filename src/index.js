@@ -6,15 +6,17 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { characterReducer } from './reducers/characterReducer';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
-import { characterRootSaga } from './sagas/characterSagas';
 import { bookReducer } from './reducers/bookReducer';
+import { characterSagas } from './sagas/characterSagas';
+import { bookSagas } from './sagas/bookSagas';
 
 
 const rootReducer = combineReducers({characters: characterReducer, books: bookReducer});
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(characterRootSaga);
+sagaMiddleware.run(bookSagas);
+sagaMiddleware.run(characterSagas);
 ReactDOM.render(
   <Provider store={store}><GoTApp /></Provider>
 , document.getElementById('root'));
