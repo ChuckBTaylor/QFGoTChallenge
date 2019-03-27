@@ -1,3 +1,4 @@
+import axios from "axios";
 
 export default function () {
   const API_ROOT = "https://www.anapioficeandfire.com/api/";
@@ -11,11 +12,25 @@ export default function () {
 
   return {
     books: {
-
+      fetchAll: request => {
+        let method = "get";
+        let url = API_ROOT + "/books";
+        return axios({
+          method, url
+        })
+      }
     },
 
     characters: {
-
+      fetchAll: request => {
+        console.log("From services");
+        
+        let method = "get";
+        let url = API_ROOT + "/characters";
+        return axios({
+          method, url
+        })
+      }
     },
 
     houses: {
