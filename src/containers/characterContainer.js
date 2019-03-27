@@ -37,7 +37,7 @@ class CharacterContainer extends Component {
     );
   }
   componentDidMount = () => {
-    console.log("CharacterContainer Mounted");
+    this.props.fetchCharacters();
   };
 }
 

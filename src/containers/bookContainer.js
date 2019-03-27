@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import { bookActions } from "../constants/constants";
 
 class BookContainer extends Component {
-
-  redner(){
-
-    return (<div>
-
-    </div>)
-  };
+  render() {
+    return <div>Books!</div>;
+  }
+  componentDidMount(){
+    this.props.fetchBooks();
+  }
 }
 const mapStateToProps = state => {
   return {
@@ -16,4 +16,13 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(BookContainer);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchBooks: () => dispatch({ type: bookActions.BOOKS_FETCH_START })
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BookContainer);

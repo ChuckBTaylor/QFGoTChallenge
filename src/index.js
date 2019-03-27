@@ -7,9 +7,10 @@ import { characterReducer } from './reducers/characterReducer';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import { characterRootSaga } from './sagas/characterSagas';
+import { bookReducer } from './reducers/bookReducer';
 
 
-const rootReducer = combineReducers({characters: characterReducer});
+const rootReducer = combineReducers({characters: characterReducer, books: bookReducer});
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
