@@ -3,7 +3,8 @@ import { characterActions } from "../constants/constants";
 const initialState = {
   fetching: false,
   list: [],
-  error: null
+  error: null,
+  lastPageRequested: 0
 };
 
 export function characterReducer(state = initialState, action) {
