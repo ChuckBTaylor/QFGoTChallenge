@@ -15,7 +15,7 @@ export function characterReducer(state = initialState, action) {
       return { ...state, fetching: true, error: null };
     case characterActions.CHARACTERS_FETCH_SUCCESS:
       let newCharacters = {};
-      action.data.data.forEach(it => newCharacters[getIdFromUrlString(it.url)] = it);
+      action.data.data.map(it => { return { ...it, id: getIdFromUrlString(it.url) } }).forEach(it => newCharacters[it.id] = it);
       return { ...state, fetching: false, list: { ...state.list, ...newCharacters }, lastPageRequested: action.lastPageRequested };
     case characterActions.CHARACTERS_FETCH_FAILURE:
       console.log(action.error);
@@ -23,15 +23,17 @@ export function characterReducer(state = initialState, action) {
     case characterActions.FETCH_CHARACTER_START:
       return { ...state, error: null };
     case characterActions.FETCH_CHARACTER_SUCCESS:
-      let newCharacter = {};
-      newCharacter[getIdFromUrlString(action.data.data.url)] = action.data.data;
-      return { ...state, list: { ...state.list, ...newCharacter } };
+      const newCharacter = action.data.data;
+      newCharacter.id = getIdFromUrlString(newCharacter.url);
+      const characterList = state.list;
+      characterList[newCharacter.id] = newCharacter;
+      return { ...state, list: characterList };
     case characterActions.FETCH_CHARACTER_FAILURE:
       console.log(action.error);
       return { ...state, error: action.error }
     case characterActions.BACK_SELECT_CHARACTER:
     case characterActions.SELECT_CHARACTER:
-      let selectedCharacter = state.list[action.payload.id];      
+      let selectedCharacter = state.list[action.payload.id];
       return { ...state, selectedCharacter };
     case houseActions.BACK_SELECT_HOUSE:
     case generalActions.CLOSE_DRILL_DOWN:

@@ -15,7 +15,7 @@ export function houseReducer(state = initialState, action) {
       return { ...state, fetching: true, error: null };
     case houseActions.HOUSES_FETCH_SUCCESS:
       let newHouses = {};
-      action.data.data.map(it => {return {...it, id: getIdFromUrlString(it.url)}}).forEach(it => newHouses[it.id] = it);
+      action.data.data.map(it => { return { ...it, id: getIdFromUrlString(it.url) } }).forEach(it => newHouses[it.id] = it);
       return { ...state, fetching: false, list: { ...state.list, ...newHouses }, lastPageRequested: action.lastPageRequested };
     case houseActions.HOUSES_FETCH_FAILURE:
       console.log(action.error);
