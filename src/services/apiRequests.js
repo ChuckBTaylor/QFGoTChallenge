@@ -3,14 +3,6 @@ import { isObjectEmpty, constructQueryStringFromObj } from "../utils/utils";
 
 export default function () {
   const API_ROOT = "https://www.anapioficeandfire.com/api";
-  const requestInfo = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    }
-  }
-
   return {
     books: {
       fetchAll: () => {
@@ -34,7 +26,14 @@ export default function () {
     },
 
     houses: {
-
+      fetch: payload => {
+        let queryString = !isObjectEmpty(payload) ? ('?' + constructQueryStringFromObj(payload)) : '';
+        let method = 'get';
+        let url = API_ROOT + "/houses" + queryString;
+        return axios({
+          method, url
+        })
+      }
     }
   }
 }

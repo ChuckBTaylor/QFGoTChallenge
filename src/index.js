@@ -9,17 +9,21 @@ import { Provider } from 'react-redux';
 import { bookReducer } from './reducers/bookReducer';
 import { characterSagas } from './sagas/characterSagas';
 import { bookSagas } from './sagas/bookSagas';
+import { houseReducer } from './reducers/houseReducer';
+import { houseSagas } from './sagas/houseSagas';
 
 
 const rootReducer = combineReducers({
   characters: characterReducer,
-  books: bookReducer
+  books: bookReducer,
+  houses: houseReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(bookSagas);
 sagaMiddleware.run(characterSagas);
+sagaMiddleware.run(houseSagas);
 ReactDOM.render(
   <Provider store={store}><GoTApp /></Provider>
 , document.getElementById('root'));

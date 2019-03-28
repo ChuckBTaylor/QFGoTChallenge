@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export function bookReducer(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
     case bookActions.BOOKS_FETCH_START:
       return { ...state, fetching: true, error: null };

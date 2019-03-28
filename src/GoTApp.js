@@ -3,13 +3,14 @@ import CharacterContainer from './containers/characterContainer'
 import BookContainer from './containers/bookContainer';
 import { bookActions } from './constants/constants';
 import { connect } from "react-redux";
+import HouseContainer from './containers/houseContainer';
 
 class GoTApp extends Component {
 
   state = {
-    viewBooks: true,
+    viewBooks: false,
     viewCharacters: false,
-    viewHouses: false
+    viewHouses: true
   };
 
   changeView = e => {
@@ -31,7 +32,7 @@ class GoTApp extends Component {
   render() {
     return (
       <div className="App">
-        <div id="selector">
+        <div id="selector" align='center'>
           <span>
             <button value='books' onClick={this.changeView} className='view-selector-button'>View Books</button>
           </span>
@@ -44,6 +45,7 @@ class GoTApp extends Component {
         </div>
         {this.state.viewCharacters ? (<CharacterContainer />) : ''}
         {this.state.viewBooks ? (<BookContainer />) : ''}
+        {this.state.viewHouses ? (<HouseContainer />) : ''}
       </div>
     );
   }

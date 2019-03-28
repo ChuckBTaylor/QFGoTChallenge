@@ -28,6 +28,11 @@ class BookContainer extends Component {
     return title;
   };
 
+  convertApiDateToFriendlyDate = (apiDate) => {
+    let date = new Date(apiDate);
+    return date.toLocaleDateString();
+  }
+
   render() {
     const columns = [
       {
@@ -47,8 +52,8 @@ class BookContainer extends Component {
       {
         Header: "Release Date",
         accessor: 'released',
-        // Cell: (date => <span className='book release-date'>{date}</span>),
-        filterable: false
+        Cell: (date => <span className='book release-date'>{this.convertApiDateToFriendlyDate(date.value)}</span>),
+        filterable: true
       }
     ];
     return (
