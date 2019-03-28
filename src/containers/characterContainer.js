@@ -42,7 +42,7 @@ class CharacterContainer extends Component {
     return {
       onClick: (e, handleOriginal) => {
         if (column.id === "characterName") {
-          let id = getIdFromUrlString(rowInfo.original.url);
+          let id = rowInfo.original.id;
           this.props.selectCharacter({ id });
         }
         if (handleOriginal) {
