@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/QFGoTChallenge/static/js/runtime~main.16fb53f8.js"
   },
   {
-    "revision": "6c762de695defdaf1fc3",
-    "url": "/QFGoTChallenge/static/js/main.3c211240.chunk.js"
+    "revision": "74465126457a5595fd57",
+    "url": "/QFGoTChallenge/static/js/main.396c21e6.chunk.js"
   },
   {
     "revision": "e3bc4248b6d27b118b61",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/QFGoTChallenge/static/css/2.158a2283.chunk.css"
   },
   {
-    "revision": "ef3d4f8f8a1eebec67d110bd652a07f9",
+    "revision": "ada7dae72adb5f14ae857365ceeee7bd",
     "url": "/QFGoTChallenge/index.html"
   }
 ];
