@@ -40,6 +40,8 @@ class HouseContainer extends Component {
   }
 
   resolveHouseData = houseData => {
+    // console.log(houseData);
+    
     let lordId = getIdFromUrlString(houseData.currentLord);
     if (this.props.characters[lordId])
       houseData.lordName = this.props.characters[lordId].name;
@@ -49,14 +51,19 @@ class HouseContainer extends Component {
   tdProps = (state, rowInfo, column) => {
     return {
       onClick: (e, handleOriginal) => {
-        if(column.id === "name"){
+        if (column.id === "name") {
           let houseId = getIdFromUrlString(rowInfo.original.url);
-          this.props.selectHouse({id: houseId});
-        } else if (column.id === "lordName"){
-          if(rowInfo.row.lordName){            
+          if(!this.props.selectedHouse || houseId !== this.props.selectedHouse.id){
+            console.log(houseId, this.props.selectedHouse);
+            
+            this.props.selectHouse({ id: houseId });
+          }else
+            console.log("House already selected");
+        } else if (column.id === "lordName") {
+          if (rowInfo.row.lordName) {
             let characterId = getIdFromUrlString(rowInfo.row.currentLord);
-            this.props.selectCharacter({id: characterId})
-          }          
+            this.props.selectCharacter({ id: characterId })
+          }
         }
         if (handleOriginal) {
           handleOriginal();
@@ -128,7 +135,8 @@ const mapStateToProps = state => {
     houses: state.houses.list,
     lastPageRequested: state.houses.lastPageRequested,
     fetchingHouses: state.houses.fetching,
-    characters: state.characters.list
+    characters: state.characters.list,
+    selectedHouse: state.houses.selectedHouse
   };
 };
 
@@ -136,8 +144,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchHouses: payload => dispatch({ type: houseActions.HOUSES_FETCH_START, payload }),
     fetchCharacter: payload => dispatch({ type: characterActions.FETCH_CHARACTER_START, payload }),
-    selectHouse: payload => dispatch({type: houseActions.SELECT_HOUSE, payload}),
-    selectCharacter: payload => dispatch({type: characterActions.SELECT_CHARACTER, payload})
+    selectHouse: payload => dispatch({ type: houseActions.SELECT_HOUSE, payload }),
+    selectCharacter: payload => dispatch({ type: characterActions.SELECT_CHARACTER, payload })
   };
 };
 

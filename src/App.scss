@@ -29,8 +29,16 @@ ul.in-table-list {
   padding: 0
 }
 
+.drill-down-back {
+  float: left;
+}
+
 .close-drill-down {
   float: right;
+}
+
+.material-icons.drill-down-back {
+  color: green;
 }
 
 .material-icons.close-drill-down{

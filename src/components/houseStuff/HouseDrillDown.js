@@ -42,6 +42,19 @@ class HouseDrillDown extends Component {
     }
   };
 
+  showBackButton = () => {
+    return this.props.appHistory.length > 1;
+  }
+
+  handleBackClick = () => {
+    const historyObj = this.props.appHistory[1];
+    if(historyObj.domain === "character"){
+      this.props.backSelectCharacter({id: historyObj.id});
+    } else if (historyObj.domain === "house"){
+      this.props.backSelectHouse({id: historyObj.id});
+    }
+  }
+
   onMemberClick = id => {
     if (this.props.characters[id]) {
       this.props.selectCharacter({ id });
@@ -75,8 +88,14 @@ class HouseDrillDown extends Component {
       .map(id => this.props.characters[id]);
     return (
       <div className="drill-down">
-        <span className="close-drill-down" onClick={this.props.closeDrillDown}>
-          <i className="material-icons close-drill-down">
+        <span className="drill-down-navigation" >
+          {this.showBackButton() ?
+            <i className="material-icons drill-down-back" onClick={this.handleBackClick}>
+              arrow_back
+            </i>
+            : ''
+          }
+          <i className="material-icons close-drill-down" onClick={this.props.closeDrillDown}>
             close
           </i>
         </span>
@@ -109,6 +128,8 @@ class HouseDrillDown extends Component {
 
   componentDidMount = () => {
     this.checkForAndFetchCharacters();
+    console.log(this.props.appHistory);
+
   };
 
   componentDidUpdate = () => {
@@ -119,7 +140,8 @@ class HouseDrillDown extends Component {
 const mapStateToProps = state => {
   return {
     characters: state.characters.list,
-    houses: state.houses.list
+    houses: state.houses.list,
+    appHistory: state.app.drillDownHistory
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -132,7 +154,9 @@ const mapDispatchToProps = dispatch => {
       dispatch({ type: houseActions.SELECT_HOUSE, payload }),
     fetchCharacter: payload =>
       dispatch({ type: characterActions.FETCH_CHARACTER_START, payload }),
-    closeDrillDown: () => dispatch({type: generalActions.CLOSE_DRILL_DOWN})
+    closeDrillDown: () => dispatch({ type: generalActions.CLOSE_DRILL_DOWN }),
+    backSelectCharacter: payload => dispatch({type: characterActions.BACK_SELECT_CHARACTER, payload}),
+    backSelectHouse: payload => dispatch({type: houseActions.BACK_SELECT_HOUSE, payload})
   };
 };
 export default connect(

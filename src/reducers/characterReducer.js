@@ -29,9 +29,11 @@ export function characterReducer(state = initialState, action) {
     case characterActions.FETCH_CHARACTER_FAILURE:
       console.log(action.error);
       return { ...state, error: action.error }
+    case characterActions.BACK_SELECT_CHARACTER:
     case characterActions.SELECT_CHARACTER:
       let selectedCharacter = state.list[action.payload.id];
       return { ...state, selectedCharacter };
+    case houseActions.BACK_SELECT_HOUSE:
     case generalActions.CLOSE_DRILL_DOWN:
     case houseActions.SELECT_HOUSE:
       return { ...state, selectedCharacter: null };

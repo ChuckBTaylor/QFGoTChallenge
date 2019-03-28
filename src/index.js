@@ -8,6 +8,7 @@ import { characterReducer } from './reducers/characterReducer';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import { bookReducer } from './reducers/bookReducer';
+import { appReducer } from './reducers/appReducer';
 import { characterSagas } from './sagas/characterSagas';
 import { bookSagas } from './sagas/bookSagas';
 import { houseReducer } from './reducers/houseReducer';
@@ -17,7 +18,8 @@ import { houseSagas } from './sagas/houseSagas';
 const rootReducer = combineReducers({
   characters: characterReducer,
   books: bookReducer,
-  houses: houseReducer
+  houses: houseReducer,
+  app: appReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();
