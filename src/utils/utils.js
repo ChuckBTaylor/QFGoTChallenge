@@ -17,6 +17,14 @@ export function getIdFromUrlString(str) {
   return +splitObj[splitObj.length - 1];
 }
 
+export function generateListKey(listName, listItem) {
+  if (typeof listItem === 'string') {
+    return `${listName}-${listItem}`;
+  } else {
+    return `${listName}-${getIdFromUrlString(listItem.url)}`;
+  }
+}
+
 export function commonFilter(filter, row, column) {
   if (!row[column.id])
     return false;

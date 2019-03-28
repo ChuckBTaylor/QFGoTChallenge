@@ -3,7 +3,7 @@ import CallApiButton from "../components/general/CallApiButton";
 import { connect } from "react-redux";
 import { characterActions } from "../constants/constants";
 import ReactTable from "react-table";
-import { isStringEmpty, commonFilter, getIdFromUrlString } from "../utils/utils";
+import { isStringEmpty, commonFilter, getIdFromUrlString, generateListKey } from "../utils/utils";
 
 class CharacterContainer extends Component {
   state = {
@@ -51,6 +51,21 @@ class CharacterContainer extends Component {
     }
   }
 
+  filterBooksAppearedIn = (filter, row) => {
+    for (let i = 0; i < row.books.length; i++) {
+      let bookId = getIdFromUrlString(row.books[i]);
+      if (this.props.books[bookId]) {
+        if (this.props.books[bookId].name.toLowerCase().includes(filter.value.toLowerCase()))
+          return true;
+      }
+    }
+    return false;
+  }
+
+  createBookList = rowInfo => {
+    return rowInfo.row.books.map(bookUrl => getIdFromUrlString(bookUrl)).filter(bookId => !!this.props.books[bookId]).map(bookId => (<li key={generateListKey('books-appeared-in-table', `${bookId}`)}>{this.props.books[bookId].name}</li>));
+  }
+
   render() {
     const domainContainerClassName = "domain-container " + (this.props.isDrillDownOpen ? "drill-down-open" : "drill-down-closed");
     const filteredCharacters = Object.values(this.props.characters).filter(it => this.filterCharacterByCulture(it));
@@ -74,6 +89,12 @@ class CharacterContainer extends Component {
       filterable: true,
       filterMethod: commonFilter,
       Footer: <span>Filter Unknown: <input type='checkbox' onChange={this.updateCultureFilter} checked={this.state.filterUnknownCulture} /></span>
+    }, {
+      Header: "Books Appeared In",
+      accessor: "books",
+      Cell: books => (<span><ul className='in-table-list'>{this.createBookList(books)}</ul></span>),
+      filterable: true,
+      filterMethod: this.filterBooksAppearedIn
     }]
     return (
       <div className={domainContainerClassName}>
@@ -111,7 +132,8 @@ const mapStateToProps = state => {
   return {
     characters: state.characters.list,
     lastPageRequested: state.characters.lastPageRequested,
-    fetchingCharacters: state.characters.fetching
+    fetchingCharacters: state.characters.fetching,
+    books: state.books.list
   };
 };
 
