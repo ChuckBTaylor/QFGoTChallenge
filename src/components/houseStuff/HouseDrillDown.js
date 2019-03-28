@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getIdFromUrlString } from "../../utils/utils";
-import { houseActions, characterActions } from "../../constants/constants";
+import { houseActions, characterActions, generalActions } from "../../constants/constants";
 import SwornMemberList from "./SwornMemberList";
 
 export class HouseDrillDown extends Component {
@@ -43,8 +43,8 @@ export class HouseDrillDown extends Component {
   };
 
   onMemberClick = id => {
-    if(this.props.characters[id]){
-      this.props.selectCharacter({id});
+    if (this.props.characters[id]) {
+      this.props.selectCharacter({ id });
     }
   };
 
@@ -75,18 +75,19 @@ export class HouseDrillDown extends Component {
       .map(id => this.props.characters[id]);
     return (
       <div className="drill-down">
-        <span className="close-drill-down">
-        Hi!
-          <icon></icon>
+        <span className="close-drill-down" onClick={this.props.closeDrillDown}>
+          <i className="material-icons close-drill-down">
+            close
+          </i>
         </span>
-        <div className="house-title">
+        <span className="house-title">
           <h3 className="house-name" align="center">
             {this.props.house.name}
           </h3>
           <h4 className="house-words" align="center">
             {words}
           </h4>
-        </div>
+        </span>
         <div className="house-info">
           <p onClick={this.selectLord}>Current Lord: {lordName}</p>
           <p>Coat of Arms: {coatOfArms}</p>
@@ -100,8 +101,8 @@ export class HouseDrillDown extends Component {
             characters={this.props.characters}
           />
         ) : (
-          " None"
-        )}
+            " None"
+          )}
       </div>
     );
   }
@@ -130,7 +131,8 @@ const mapDispatchToProps = dispatch => {
     selectHouse: payload =>
       dispatch({ type: houseActions.SELECT_HOUSE, payload }),
     fetchCharacter: payload =>
-      dispatch({ type: characterActions.FETCH_CHARACTER_START, payload })
+      dispatch({ type: characterActions.FETCH_CHARACTER_START, payload }),
+    closeDrillDown: () => dispatch({type: generalActions.CLOSE_DRILL_DOWN})
   };
 };
 export default connect(

@@ -3,7 +3,7 @@ import CharacterContainer from './containers/CharacterContainer'
 import BookContainer from './containers/BookContainer';
 import { bookActions } from './constants/constants';
 import { connect } from "react-redux";
-import './App.css';
+import './App.scss';
 import HouseContainer from './containers/HouseContainer';
 import { CharacterDrillDown } from './components/characterStuff/CharacterDrillDown';
 import HouseDrillDown from './components/houseStuff/HouseDrillDown';

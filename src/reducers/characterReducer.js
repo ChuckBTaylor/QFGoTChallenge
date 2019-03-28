@@ -1,5 +1,6 @@
-import { characterActions, houseActions } from "../constants/constants";
+import { characterActions, houseActions, generalActions } from "../constants/constants";
 import { getIdFromUrlString } from "../utils/utils";
+import { STATUS_CODES } from "http";
 
 const initialState = {
   fetching: false,
@@ -32,10 +33,11 @@ export function characterReducer(state = initialState, action) {
     case characterActions.SELECT_CHARACTER:
       let selectedCharacter = state.list[action.payload.id];
       return { ...state, selectedCharacter };
+    case generalActions:
     case houseActions.SELECT_HOUSE:
       return { ...state, selectedCharacter: null };
     default:
-      // console.log("Failed to match action: " + action.type + " from characterReducer");
+      console.log("Failed to match action: " + action.type + " from characterReducer");
       return state;
   }
 };

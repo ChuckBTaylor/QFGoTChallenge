@@ -1,4 +1,4 @@
-import { houseActions, characterActions } from "../constants/constants";
+import { houseActions, characterActions, generalActions } from "../constants/constants";
 import { getIdFromUrlString } from "../utils/utils";
 
 const initialState = {
@@ -32,6 +32,7 @@ export function houseReducer(state = initialState, action) {
     case houseActions.SELECT_HOUSE:
       let selectedHouse = state.list[action.payload.id];
       return { ...state, selectedHouse };
+    case generalActions.CLOSE_DRILL_DOWN:
     case characterActions.SELECT_CHARACTER:
       return { ...state, selectedHouse: null };
     default:
