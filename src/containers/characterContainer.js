@@ -29,9 +29,6 @@ class CharacterContainer extends Component {
   }
 
   filterCharacterByCulture = it => {
-    console.log(this.state.filterUnknownCulture);
-    console.log(it.culture);
-    
     if (!this.state.filterUnknownCulture)
       return true;
     if(isStringEmpty(it.culture)){      
@@ -42,8 +39,6 @@ class CharacterContainer extends Component {
 
   render() {
     const filteredCharacters = Object.values(this.props.characters).filter(it => this.filterCharacterByCulture(it));
-    console.log(filteredCharacters);
-
     const columns = [{
       Header: "Name",
       accessor: 'name',
@@ -86,9 +81,7 @@ class CharacterContainer extends Component {
       this.props.fetchCharacters({ page: 1 });
   };
 
-  componentDidUpdate = () => {
-    console.log(this.props.characters);
-    
+  componentDidUpdate = () => {    
   }
 }
 
