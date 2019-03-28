@@ -47,7 +47,7 @@ class BookContainer extends Component {
       {
         Header: "Number of Pages",
         accessor: "numberOfPages",
-        id: "numberOfPagesInBook",
+        id: "numberOfPages",
         filterable: false
       },
       {

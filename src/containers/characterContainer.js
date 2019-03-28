@@ -49,7 +49,8 @@ class CharacterContainer extends Component {
     }, {
       Header: "Gender",
       accessor: 'gender',
-      filterable: true
+      filterable: true,
+      filterMethod: (filter, row) => row.gender.toLowerCase().startsWith(filter.value.toLowerCase())
     }, {
       Header: "Culture",
       accessor: 'culture',
