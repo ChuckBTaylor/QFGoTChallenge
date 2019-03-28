@@ -9,12 +9,11 @@ const initialState = {
 
 export function bookReducer(state = initialState, action) {
   console.log(action);
-  
   switch (action.type) {
     case bookActions.BOOKS_FETCH_START:
       return { ...state, fetching: true, error: null };
     case bookActions.BOOKS_FETCH_SUCCESS:
-      return { ...state, fetching: false, list: action.books };
+      return { ...state, fetching: false, list: action.data.data };
     case bookActions.BOOKS_FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error };
     default:

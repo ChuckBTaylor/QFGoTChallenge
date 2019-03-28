@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import './assets/stylesheets/app.scss';
 import CharacterContainer from './containers/characterContainer'
 import BookContainer from './containers/bookContainer';
 
 class GoTApp extends Component {
+
+  state = {
+    viewBooks: true,
+    viewCharacters: false,
+    viewHouses: false
+  };
   
   render() {
     return (
       <div className="App">
-        <CharacterContainer />
-        <BookContainer />
+        {this.state.viewCharacters ? (<CharacterContainer />) : ''}
+        {this.state.viewBooks ? (<BookContainer />) : ''}
       </div>
     );
   }
