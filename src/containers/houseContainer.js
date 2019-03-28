@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { houseActions } from "../constants/constants";
 import ReactTable from "react-table";
 import { commonFilter } from "../utils/utils";
+import CallApiButton from '../components/general/CallApiButton';
 
 class HouseContainer extends Component {
 
@@ -11,6 +12,10 @@ class HouseContainer extends Component {
     houseFilter: "",
     pageSize: 15
   }
+
+  getMoreHouses = () => {
+    this.props.fetchHouses({ page: (+this.props.lastPageRequested + 1) });
+  };
 
   updateFilter = e => {
     this.setState({ houseFilter: e.target.value });
@@ -60,6 +65,10 @@ class HouseContainer extends Component {
           pageSize={this.state.pageSize}
           onPageSizeChange={this.changePageSize}
           pageSizeOptions={[5, 10, 15]}
+        />
+                <CallApiButton
+          onClick={this.getMoreHouses}
+          buttonName={"Get More Houses"}
         />
       </div>
     );

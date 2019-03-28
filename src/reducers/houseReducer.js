@@ -9,6 +9,8 @@ const initialState = {
 };
 
 export function houseReducer(state = initialState, action) {
+  console.log(action);
+  
   switch (action.type) {
     case houseActions.HOUSES_FETCH_START:
       return { ...state, fetching: true, error: null };

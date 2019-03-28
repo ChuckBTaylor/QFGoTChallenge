@@ -4,7 +4,7 @@ import apiRequests from "../services/apiRequests";
 
 function* fetchHouses(action) {
   try{
-    const data = yield call(apiRequests().houses.fetch);
+    const data = yield call(apiRequests().houses.fetch, action.payload);
     const lastPageRequested = action.payload.page;
     yield put({type: houseActions.HOUSES_FETCH_SUCCESS, data, lastPageRequested});
   } catch (error){
