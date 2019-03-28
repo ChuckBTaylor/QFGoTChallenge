@@ -26,8 +26,6 @@ export default function () {
       fetchOne: payload => {
         let method = "get";
         let url = API_ROOT + "/characters/" + payload.id;
-        console.log(url);
-        
         return axios({
           method, url
         });

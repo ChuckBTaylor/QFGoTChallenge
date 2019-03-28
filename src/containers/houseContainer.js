@@ -8,7 +8,7 @@ import CallApiButton from '../components/general/CallApiButton';
 
 class HouseContainer extends Component {
 
-  state = {
+  state = { 
     houseFilter: "",
     pageSize: 20
   }
@@ -46,6 +46,22 @@ class HouseContainer extends Component {
     return houseData;
   }
 
+  tdProps = (state, rowInfo, column, instance) => {
+    return {
+      onClick: (e, handleOriginal) => {
+        console.log("A Td Element was clicked!");
+        console.log("it produced this event:", e);
+        console.log("It was in this column:", column);
+        console.log("It was in this row:", rowInfo);
+        console.log("It was in this table instance:", instance);
+        if (handleOriginal) {
+          handleOriginal();
+        }
+      }
+    }
+
+  }
+
   render() {
     const columns = [{
       Header: "Name",
@@ -71,16 +87,19 @@ class HouseContainer extends Component {
     }];
     return (
       <div className="house-container">
-        <ReactTable
-          data={Object.values(this.props.houses)}
-          resolveData={data => data.map(this.resolveHouseData)}
-          columns={columns}
-          loading={this.props.fetchingHouses}
-          showFilters={true}
-          filterable={true}
-          pageSize={this.state.pageSize}
-          onPageSizeChange={this.changePageSize}
-        />
+        <div className="table-drilldown-container">
+          <ReactTable
+            data={Object.values(this.props.houses)}
+            resolveData={data => data.map(this.resolveHouseData)}
+            columns={columns}
+            loading={this.props.fetchingHouses}
+            showFilters={true}
+            filterable={true}
+            pageSize={this.state.pageSize}
+            onPageSizeChange={this.changePageSize}
+            getTdProps={this.tdProps}
+          />
+        </div>
         <CallApiButton
           onClick={this.getMoreHouses}
           buttonName={"Get More Houses"}
@@ -94,7 +113,7 @@ class HouseContainer extends Component {
   };
 
   componentDidUpdate = () => {
-    Object.values(this.props.houses).filter(house => house.currentLord && !house.lordName).forEach(house => this.props.fetchCharacter({id: getIdFromUrlString(house.currentLord)}));
+    Object.values(this.props.houses).filter(house => house.currentLord && !house.lordName).forEach(house => this.props.fetchCharacter({ id: getIdFromUrlString(house.currentLord) }));
   }
 }
 const mapStateToProps = state => {
@@ -109,7 +128,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchHouses: payload => dispatch({ type: houseActions.HOUSES_FETCH_START, payload }),
-    fetchCharacter: payload => dispatch({type: characterActions.FETCH_CHARACTER_START, payload})
+    fetchCharacter: payload => dispatch({ type: characterActions.FETCH_CHARACTER_START, payload })
   };
 };
 

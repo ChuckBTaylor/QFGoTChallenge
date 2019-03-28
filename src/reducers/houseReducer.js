@@ -8,9 +8,7 @@ const initialState = {
   lastPageRequested: 0
 };
 
-export function houseReducer(state = initialState, action) {
-  console.log(action);
-  
+export function houseReducer(state = initialState, action) {  
   switch (action.type) {
     case houseActions.HOUSES_FETCH_START:
       return { ...state, fetching: true, error: null };

@@ -15,7 +15,7 @@ class GoTApp extends Component {
 
   changeView = e => {
     let viewBooks = false, viewCharacters = false, viewHouses = false;
-    switch(e.target.value){
+    switch (e.target.value) {
       case 'books':
         viewBooks = true;
         break;
@@ -25,8 +25,10 @@ class GoTApp extends Component {
       case 'houses':
         viewHouses = true;
         break;
+      default:
+        break;
     }
-    this.setState({viewBooks, viewCharacters, viewHouses});
+    this.setState({ viewBooks, viewCharacters, viewHouses });
   }
 
   render() {
