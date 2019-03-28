@@ -32,10 +32,8 @@ export function houseReducer(state = initialState, action) {
       console.log(action.error);
       return { ...state, error: action.error };
     case houseActions.BACK_SELECT_HOUSE:
-      console.log("Back Selecting house", action);
     case houseActions.SELECT_HOUSE:
       let selectedHouse = state.list[action.payload.id];
-      console.log(selectedHouse);
       return { ...state, selectedHouse };
     case characterActions.BACK_SELECT_CHARACTER:
     case generalActions.CLOSE_DRILL_DOWN:

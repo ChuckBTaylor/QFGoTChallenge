@@ -11,13 +11,13 @@ export function appReducer(state = initialState, action) {
       let newCharacterHistory = { domain: "character", id: action.payload.id }
       drillDownHistory = state.drillDownHistory;
       drillDownHistory.unshift(newCharacterHistory);
-      drilldownHistory = drillDownHistory.slice(0, 20);
+      drillDownHistory = drillDownHistory.slice(0, 20);
       return { ...state, drillDownHistory };
     case houseActions.SELECT_HOUSE:
       let newHouseHistory = { domain: "house", id: action.payload.id }
       drillDownHistory = state.drillDownHistory;
       drillDownHistory.unshift(newHouseHistory);
-      drilldownHistory = drillDownHistory.slice(0, 20);
+      drillDownHistory = drillDownHistory.slice(0, 20);
       return { ...state, drillDownHistory };
     case houseActions.BACK_SELECT_HOUSE:
     case characterActions.BACK_SELECT_CHARACTER:
