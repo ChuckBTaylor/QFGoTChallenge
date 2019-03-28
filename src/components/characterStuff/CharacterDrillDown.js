@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { generateListKey } from "../../utils/utils";
 import { generalActions } from "../../constants/constants";
+import { characterActions, houseActions } from '../../constants/constants';
 
 class CharacterDrillDown extends Component {
   constructAliases = () => {
@@ -22,6 +23,21 @@ class CharacterDrillDown extends Component {
     return arr;
   };
 
+  handleBackClick = () => {
+    const historyObj = this.props.appHistory[1];
+    console.log(historyObj);
+    
+    if(historyObj.domain === "character"){
+      this.props.backSelectCharacter({id: historyObj.id});
+    } else if (historyObj.domain === "house"){
+      this.props.backSelectHouse({id: historyObj.id});
+    }
+  }
+
+  showBackButton = () => {
+    return this.props.appHistory.length > 1;
+  }
+
   render() {
     const name = this.props.character.name
       ? this.props.character.name
@@ -32,8 +48,14 @@ class CharacterDrillDown extends Component {
     const aliases = this.constructAliases();
     return (
       <div className="drill-down">
-        <span className="close-drill-down" onClick={this.props.closeDrillDown}>
-          <i className="material-icons close-drill-down">close</i>
+        <span className="drill-down-navigation" >
+        {this.showBackButton() ?
+            <i className="material-icons drill-down-back" onClick={this.handleBackClick}>
+              arrow_back
+            </i>
+            : ''
+          }
+          <i className="material-icons close-drill-down" onClick={this.props.closeDrillDown}>close</i>
         </span>
         <div className="character-title">
           <h3 className="character-name" align="center">
@@ -67,13 +89,21 @@ class CharacterDrillDown extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    appHistory: state.app.drillDownHistory
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
-    closeDrillDown: () => dispatch({type: generalActions.CLOSE_DRILL_DOWN})
+    closeDrillDown: () => dispatch({type: generalActions.CLOSE_DRILL_DOWN}),
+    backSelectCharacter: payload => dispatch({type: characterActions.BACK_SELECT_CHARACTER, payload}),
+    backSelectHouse: payload => dispatch({type: houseActions.BACK_SELECT_HOUSE, payload})
   }
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CharacterDrillDown);

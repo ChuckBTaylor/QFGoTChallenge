@@ -54,8 +54,6 @@ class HouseContainer extends Component {
         if (column.id === "name") {
           let houseId = getIdFromUrlString(rowInfo.original.url);
           if(!this.props.selectedHouse || houseId !== this.props.selectedHouse.id){
-            console.log(houseId, this.props.selectedHouse);
-            
             this.props.selectHouse({ id: houseId });
           }else
             console.log("House already selected");
@@ -70,7 +68,6 @@ class HouseContainer extends Component {
         }
       }
     }
-
   }
 
   render() {
