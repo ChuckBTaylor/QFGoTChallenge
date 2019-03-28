@@ -11,7 +11,10 @@ import { characterSagas } from './sagas/characterSagas';
 import { bookSagas } from './sagas/bookSagas';
 
 
-const rootReducer = combineReducers({characters: characterReducer, books: bookReducer});
+const rootReducer = combineReducers({
+  characters: characterReducer,
+  books: bookReducer
+});
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));

@@ -12,9 +12,9 @@ export default function () {
 
   return {
     books: {
-      fetchAll: request => {
+      fetchAll: () => {
         let method = "get";
-        let url = API_ROOT + "/books";
+        let url = API_ROOT + "/books?pageSize=20";
         return axios({
           method, url
         })
