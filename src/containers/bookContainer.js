@@ -43,12 +43,18 @@ class BookContainer extends Component {
         accessor: "numberOfPages",
         id: "numberOfPagesInBook",
         filterable: false
+      },
+      {
+        Header: "Release Date",
+        accessor: 'released',
+        // Cell: (date => <span className='book release-date'>{date}</span>),
+        filterable: false
       }
     ];
     return (
       <div className="book-container">
         <ReactTable
-          data={this.props.books}
+          data={Object.values(this.props.books)}
           columns={columns}
           loading={this.props.fetchingBooks}
           showFilters={true}
