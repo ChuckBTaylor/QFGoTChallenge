@@ -55,7 +55,8 @@ class HouseContainer extends Component {
       Header: "Region",
       accessor: 'region',
       filterMethod: commonFilter,
-      sortMethod: commonSort
+      sortMethod: commonSort,
+      Cell: region => (<span>{region.value ? region.value : 'region unknown'}</span>)
     }, {
       Header: "Current Lord link",
       accessor: 'currentLord',
