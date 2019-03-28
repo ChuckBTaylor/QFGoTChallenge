@@ -10,18 +10,27 @@ export default function () {
         let url = API_ROOT + "/books?pageSize=20";
         return axios({
           method, url
-        })
+        });
       }
     },
 
     characters: {
       fetch: payload => {
-        let queryString = !isObjectEmpty(payload) ? ('?' + constructQueryStringFromObj(payload)): '';     
+        let queryString = !isObjectEmpty(payload) ? ('?' + constructQueryStringFromObj(payload)) : '';
         let method = "get";
         let url = API_ROOT + "/characters" + queryString;
         return axios({
           method, url
-        })
+        });
+      },
+      fetchOne: payload => {
+        let method = "get";
+        let url = API_ROOT + "/characters/" + payload.id;
+        console.log(url);
+        
+        return axios({
+          method, url
+        });
       }
     },
 
@@ -32,7 +41,7 @@ export default function () {
         let url = API_ROOT + "/houses" + queryString;
         return axios({
           method, url
-        })
+        });
       }
     }
   }

@@ -42,7 +42,8 @@ class BookContainer extends Component {
         showFilter: true,
         id: "bookTitle",
         Cell: (title => <span className='book-title'>{this.reformatBookTitle(title.value)}</span>),
-        filterMethod: commonFilter
+        filterMethod: commonFilter,
+        sorthMethod: commonSort
       },
       {
         Header: "Number of Pages",

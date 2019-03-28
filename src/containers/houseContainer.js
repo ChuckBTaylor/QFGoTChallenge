@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import 'react-table/react-table.css';
 import { connect } from "react-redux";
-import { houseActions } from "../constants/constants";
+import { houseActions, characterActions } from "../constants/constants";
 import ReactTable from "react-table";
-import { commonFilter } from "../utils/utils";
+import { commonFilter, getIdFromUrlString, commonSort } from "../utils/utils";
 import CallApiButton from '../components/general/CallApiButton';
 
 class HouseContainer extends Component {
 
   state = {
     houseFilter: "",
-    pageSize: 15
+    pageSize: 20
   }
 
   getMoreHouses = () => {
@@ -34,9 +34,16 @@ class HouseContainer extends Component {
     return title;
   };
 
-  convertApiDateToFriendlyDate = (apiDate) => {
+  convertApiDateToFriendlyDate = apiDate => {
     let date = new Date(apiDate);
     return date.toLocaleDateString();
+  }
+
+  resolveHouseData = houseData => {
+    let lordId = getIdFromUrlString(houseData.currentLord);
+    if (this.props.characters[lordId])
+      houseData.lordName = this.props.characters[lordId].name;
+    return houseData;
   }
 
   render() {
@@ -44,29 +51,35 @@ class HouseContainer extends Component {
       Header: "Name",
       accessor: 'name',
       filterMethod: commonFilter
-      // filterMethod: (filter,row) => row.name.toLowerCase().includes(filter.value.toLowerCase())
-    },{
+    }, {
       Header: "Region",
       accessor: 'region',
-      filterMethod: commonFilter
-    },{
-      Header: "Current Lord",
+      filterMethod: commonFilter,
+      sortMethod: commonSort
+    }, {
+      Header: "Current Lord link",
       accessor: 'currentLord',
-      filterable: false
+      filterable: false,
+      show: false
+    }, {
+      Header: "Current Lord",
+      accessor: 'lordName',
+      filterable: true,
+      Cell: lordName => (<span>{lordName.value ? lordName.value : "Name unknown"}</span>),
+      filterMethod: commonFilter
     }];
     return (
       <div className="house-container">
         <ReactTable
           data={Object.values(this.props.houses)}
+          resolveData={data => data.map(this.resolveHouseData)}
           columns={columns}
           loading={this.props.fetchingHouses}
           showFilters={true}
           filterable={true}
           pageSize={this.state.pageSize}
-          onPageSizeChange={this.changePageSize}
-          pageSizeOptions={[5, 10, 15]}
         />
-                <CallApiButton
+        <CallApiButton
           onClick={this.getMoreHouses}
           buttonName={"Get More Houses"}
         />
@@ -75,22 +88,26 @@ class HouseContainer extends Component {
   }
   componentDidMount = () => {
     if (this.props.lastPageRequested < 1)
-      this.props.fetchHouses({ page: 1 });      
+      this.props.fetchHouses({ page: 1 });
   };
+
   componentDidUpdate = () => {
+    Object.values(this.props.houses).filter(house => house.currentLord && !house.lordName).forEach(house => this.props.fetchCharacter({id: getIdFromUrlString(house.currentLord)}));
   }
 }
 const mapStateToProps = state => {
   return {
     houses: state.houses.list,
     lastPageRequested: state.houses.lastPageRequested,
-    fetchingHouses: state.houses.fetching
+    fetchingHouses: state.houses.fetching,
+    characters: state.characters.list
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchHouses: payload => dispatch({ type: houseActions.HOUSES_FETCH_START, payload })
+    fetchHouses: payload => dispatch({ type: houseActions.HOUSES_FETCH_START, payload }),
+    fetchCharacter: payload => dispatch({type: characterActions.FETCH_CHARACTER_START, payload})
   };
 };
 

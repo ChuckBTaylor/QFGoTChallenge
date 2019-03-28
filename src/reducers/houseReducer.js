@@ -1,5 +1,5 @@
 import { houseActions } from "../constants/constants";
-import { getIdFromUrl } from "../utils/utils";
+import { getIdFromUrlString } from "../utils/utils";
 
 const initialState = {
   fetching: false,
@@ -16,7 +16,7 @@ export function houseReducer(state = initialState, action) {
       return { ...state, fetching: true, error: null };
     case houseActions.HOUSES_FETCH_SUCCESS:
     let newHouses = {};
-    action.data.data.forEach(it => newHouses[getIdFromUrl(it)] = it);      
+    action.data.data.forEach(it => newHouses[getIdFromUrlString(it.url)] = it);      
     return { ...state, fetching: false, list: {...state.list, ...newHouses}, lastPageRequested: action.lastPageRequested };
     case houseActions.HOUSES_FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error };
