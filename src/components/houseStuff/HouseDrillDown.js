@@ -4,7 +4,7 @@ import { getIdFromUrlString } from "../../utils/utils";
 import { houseActions, characterActions, generalActions } from "../../constants/constants";
 import SwornMemberList from "./SwornMemberList";
 
-export class HouseDrillDown extends Component {
+class HouseDrillDown extends Component {
   checkForAndFetchCharacters = () => {
     const overlord = getIdFromUrlString(this.props.house.overlord);
     if (overlord && !this.props.houses[overlord]) {

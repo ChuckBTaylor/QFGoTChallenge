@@ -5,7 +5,7 @@ import { bookActions } from './constants/constants';
 import { connect } from "react-redux";
 import './App.scss';
 import HouseContainer from './containers/HouseContainer';
-import { CharacterDrillDown } from './components/characterStuff/CharacterDrillDown';
+import CharacterDrillDown from './components/characterStuff/CharacterDrillDown';
 import HouseDrillDown from './components/houseStuff/HouseDrillDown';
 
 class GoTApp extends Component {
