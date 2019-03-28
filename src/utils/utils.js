@@ -11,3 +11,8 @@ export function constructQueryStringFromObj(obj){
 export function isStringEmpty(str){
 return (str === undefined || str === null || str === '');
 }
+
+export function getIdFromUrl(obj){
+  let splitObj = obj.url.split('/');
+  return +splitObj[splitObj.length - 1];
+}

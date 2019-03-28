@@ -2,7 +2,7 @@ import { bookActions } from "../constants/constants";
 
 const initialState = {
   fetching: false,
-  list: [],
+  list: {},
   error: null,
   lastPageRequest: 0
 };

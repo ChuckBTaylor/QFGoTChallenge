@@ -41,7 +41,7 @@ class CharacterContainer extends Component {
   }
 
   render() {
-    const filteredCharacters = this.props.characters.filter(it => this.filterCharacterByCulture(it));
+    const filteredCharacters = Object.values(this.props.characters).filter(it => this.filterCharacterByCulture(it));
     console.log(filteredCharacters);
 
     const columns = [{
