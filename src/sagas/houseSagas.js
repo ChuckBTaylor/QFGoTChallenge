@@ -12,8 +12,18 @@ function* fetchHouses(action) {
   }
 }
 
+function* houseFetch(action) {
+  try {    
+    const data = yield call(apiRequests().houses.fetchOne, action.payload);
+    yield put({type: houseActions.FETCH_HOUSE_SUCCESS, data});
+  } catch (error) {
+    yield put({type: houseActions.FETCH_HOUSE_FAILURE, error})
+  }
+}
+
 export function* houseSagas() {
   yield all([
-    yield takeEvery(houseActions.HOUSES_FETCH_START, fetchHouses)
+    yield takeEvery(houseActions.HOUSES_FETCH_START, fetchHouses),
+    yield takeEvery(houseActions.FETCH_HOUSE_START, houseFetch)
   ]);
 }

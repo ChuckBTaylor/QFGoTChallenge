@@ -35,10 +35,7 @@ class GoTApp extends Component {
   }
 
   render() {
-    const isDrillDownOpen = this.props.selectedCharacter || this.props.selectedHouse;
-    console.log("character selected: ", this.props.selectedCharacter);
-    console.log("house selected: ", this.props.selectedHouse);
-    
+    const isDrillDownOpen = this.props.selectedCharacter || this.props.selectedHouse;    
     return (
       <div className="git-app">
         <div id="domain-selector" align='center'>
@@ -65,9 +62,7 @@ class GoTApp extends Component {
     this.props.fetchBooks();
   }
 
-  componentDidUpdate = () => {
-    console.log("GoT Component updated");
-    
+  componentDidUpdate = () => {    
   }
 }
 

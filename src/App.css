@@ -1,12 +1,21 @@
 .domain-container{
   margin-right: 2%;
-  width: 55%;
+  float: left;
 }
 
-.api-button {
-  width: 42%;
+.domain-container.drill-down-open {
+  width: 50%;
+}
+
+.domain-container.drill-down-closed {
+  width: 100%;
+}
+
+.api-button button {
+  width: 100%;
 }
 
 .drill-down{
   width: 45%;
+  float: left;
 }

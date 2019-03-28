@@ -31,7 +31,7 @@ class CharacterContainer extends Component {
   filterCharacterByCulture = it => {
     if (!this.state.filterUnknownCulture)
       return true;
-    if(isStringEmpty(it.culture)){      
+    if (isStringEmpty(it.culture)) {
       return false;
     }
     return true;
@@ -40,9 +40,9 @@ class CharacterContainer extends Component {
   tdProps = (state, rowInfo, column) => {
     return {
       onClick: (e, handleOriginal) => {
-        if(column.id === "characterName"){
+        if (column.id === "characterName") {
           let id = getIdFromUrlString(rowInfo.original.url);
-          this.props.selectCharacter({id});
+          this.props.selectCharacter({ id });
         }
         if (handleOriginal) {
           handleOriginal();
@@ -52,6 +52,7 @@ class CharacterContainer extends Component {
   }
 
   render() {
+    const domainContainerClassName = "domain-container " + (this.props.isDrillDownOpen ? "drill-down-open" : "drill-down-closed");
     const filteredCharacters = Object.values(this.props.characters).filter(it => this.filterCharacterByCulture(it));
     const columns = [{
       Header: "Name",
@@ -75,21 +76,25 @@ class CharacterContainer extends Component {
       Footer: <span>Filter Unknown: <input type='checkbox' onChange={this.updateCultureFilter} checked={this.state.filterUnknownCulture} /></span>
     }]
     return (
-      <div>
-        <ReactTable
-          data={filteredCharacters}
-          columns={columns}
-          resolveData={data => data.map(row => this.characterValidator(row))}
-          pageSize={this.state.pageSize}
-          onPageSizeChange={this.changePageSize}
-          showFilters={true}
-          loading={this.props.fetchingCharacters}
-          getTdProps={this.tdProps}
-        />
-        <CallApiButton
-          onClick={this.getMoreCharacters}
-          buttonName={"Get More Characters"}
-        />
+      <div className={domainContainerClassName}>
+        <span className="table-span">
+          <ReactTable
+            data={filteredCharacters}
+            columns={columns}
+            resolveData={data => data.map(row => this.characterValidator(row))}
+            pageSize={this.state.pageSize}
+            onPageSizeChange={this.changePageSize}
+            showFilters={true}
+            loading={this.props.fetchingCharacters}
+            getTdProps={this.tdProps}
+          />
+        </span>
+        <div className="api-button">
+          <CallApiButton
+            onClick={this.getMoreCharacters}
+            buttonName={"Get More Characters"}
+          />
+        </div>
       </div>
     );
   }
@@ -98,7 +103,7 @@ class CharacterContainer extends Component {
       this.props.fetchCharacters({ page: 1 });
   };
 
-  componentDidUpdate = () => {    
+  componentDidUpdate = () => {
   }
 }
 
@@ -114,7 +119,7 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchCharacters: payload =>
       dispatch({ type: characterActions.CHARACTERS_FETCH_START, payload }),
-    selectCharacter: payload => dispatch({type: characterActions.SELECT_CHARACTER, payload})
+    selectCharacter: payload => dispatch({ type: characterActions.SELECT_CHARACTER, payload })
   };
 };
 

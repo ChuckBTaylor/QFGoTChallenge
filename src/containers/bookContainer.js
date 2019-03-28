@@ -13,11 +13,11 @@ class BookContainer extends Component {
   }
 
   updateFilter = e => {
-    this.setState({bookFilter: e.target.value});
+    this.setState({ bookFilter: e.target.value });
   }
 
   changePageSize = pageSize => {
-    this.setState({pageSize});    
+    this.setState({ pageSize });
   }
 
   reformatBookTitle = title => {
@@ -35,6 +35,7 @@ class BookContainer extends Component {
   }
 
   render() {
+    const domainContainerClassName = "domain-container " + (this.props.isDrillDownOpen ? "drill-down-open" : "drill-down-closed");
     const columns = [
       {
         Header: "Title",
@@ -59,17 +60,19 @@ class BookContainer extends Component {
       }
     ];
     return (
-      <div className="book-container">
-        <ReactTable
-          data={Object.values(this.props.books)}
-          columns={columns}
-          loading={this.props.fetchingBooks}
-          showFilters={true}
-          filterable={true}
-          pageSize={this.state.pageSize}
-          onPageSizeChange={this.changePageSize}
-          pageSizeOptions={[5, 10, 15]}
-        />     
+      <div className={domainContainerClassName}>
+        <span className="table-span">
+          <ReactTable
+            data={Object.values(this.props.books)}
+            columns={columns}
+            loading={this.props.fetchingBooks}
+            showFilters={true}
+            filterable={true}
+            pageSize={this.state.pageSize}
+            onPageSizeChange={this.changePageSize}
+            pageSizeOptions={[5, 10, 15]}
+          />
+        </span>
       </div>
     );
   }

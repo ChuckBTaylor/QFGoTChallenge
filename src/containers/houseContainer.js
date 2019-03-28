@@ -67,6 +67,7 @@ class HouseContainer extends Component {
   }
 
   render() {
+    const domainContainerClassName = "domain-container " + (this.props.isDrillDownOpen ? "drill-down-open" : "drill-down-closed");
     const columns = [{
       Header: "Name",
       accessor: 'name',
@@ -90,7 +91,7 @@ class HouseContainer extends Component {
       filterMethod: commonFilter
     }];
     return (
-      <div className="house-container domain-container">
+      <div className={domainContainerClassName}>
         <span className="table-span">
           <ReactTable
             data={Object.values(this.props.houses)}

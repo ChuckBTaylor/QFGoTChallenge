@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export class CharacterDrillDown extends Component {
   render() {
     return (
-      <div></div>
+      <div className="drill-down">Character</div>
     )
   }
 }
