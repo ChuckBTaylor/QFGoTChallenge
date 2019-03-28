@@ -62,13 +62,9 @@ class HouseContainer extends Component {
   }
   componentDidMount = () => {
     if (this.props.lastPageRequested < 1)
-      this.props.fetchHouses({ page: 1 });
-      console.log(this);
-      
+      this.props.fetchHouses({ page: 1 });      
   };
   componentDidUpdate = () => {
-    console.log(this.props);
-    
   }
 }
 const mapStateToProps = state => {

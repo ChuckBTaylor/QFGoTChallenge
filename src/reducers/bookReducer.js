@@ -16,7 +16,7 @@ export function bookReducer(state = initialState, action) {
     case bookActions.BOOKS_FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error };
     default:
-      console.log("Failed to match action " + action.type + " from book reducer.");
+      // console.log("Failed to match action " + action.type + " from book reducer.");
       return state;
   }
 }

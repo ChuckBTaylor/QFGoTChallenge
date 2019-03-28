@@ -1,4 +1,5 @@
 import { houseActions } from "../constants/constants";
+import { getIdFromUrl } from "../utils/utils";
 
 const initialState = {
   fetching: false,
@@ -8,16 +9,17 @@ const initialState = {
 };
 
 export function houseReducer(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
     case houseActions.HOUSES_FETCH_START:
       return { ...state, fetching: true, error: null };
     case houseActions.HOUSES_FETCH_SUCCESS:
-      return { ...state, fetching: false, list: action.data.data };
+    let newHouses = {};
+    action.data.data.forEach(it => newHouses[getIdFromUrl(it)] = it);      
+    return { ...state, fetching: false, list: {...state.list, ...newHouses}, lastPageRequested: action.lastPageRequested };
     case houseActions.HOUSES_FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error };
     default:
-      console.log("Failed to match action " + action.type + " from house reducer.");
+      // console.log("Failed to match action " + action.type + " from house reducer.");
       return state;
   }
 }

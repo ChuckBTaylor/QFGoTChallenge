@@ -19,7 +19,7 @@ export function characterReducer(state = initialState, action) {
     case characterActions.CHARACTERS_FETCH_FAILURE:
       return { ...state, fetching: false, characters: [], error: action.error };
     default:
-      console.log("Failed to match action: " + action.type + " from characterReducer");
+      // console.log("Failed to match action: " + action.type + " from characterReducer");
       return state;
   }
 };
