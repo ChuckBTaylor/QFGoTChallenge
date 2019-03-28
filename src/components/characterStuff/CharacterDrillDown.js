@@ -7,8 +7,9 @@ export class CharacterDrillDown extends Component {
     let aliases = this.props.character.aliases;
     let i = this.props.character.name ? 0 : 1;
     let arr = [];
-    for(i; i < aliases.length; i++){
-      arr.push(<li className="unclickable" key={generateListKey("alias-list", aliases[i])}>{aliases[i]}</li>)
+    for (i; i < aliases.length; i++) {
+      if (!!aliases[i])
+        arr.push(<li className="unclickable" key={generateListKey("alias-list", aliases[i])}>{aliases[i]}</li>)
     }
     return arr;
   }
@@ -20,7 +21,7 @@ export class CharacterDrillDown extends Component {
     const culture = this.props.character.culture
       ? this.props.character.culture
       : "";
-      const aliases = this.constructAliases();
+    const aliases = this.constructAliases();
     return (
       <div className="drill-down">
         <div className="character-title">

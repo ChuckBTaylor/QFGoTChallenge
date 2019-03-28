@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bourbon": "^5.1.0",
+    "bourbon-neat": "^3.0.1",
     "gh-pages": "^2.0.1",
     "node-sass": "^4.11.0",
     "react": "^16.8.5",

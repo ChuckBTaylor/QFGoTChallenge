@@ -12,8 +12,8 @@ class GoTApp extends Component {
 
   state = {
     viewBooks: false,
-    viewCharacters: true,
-    viewHouses: false
+    viewCharacters: false,
+    viewHouses: true
   };
 
   changeView = e => {

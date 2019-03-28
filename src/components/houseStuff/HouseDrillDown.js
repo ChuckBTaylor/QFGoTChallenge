@@ -42,8 +42,10 @@ export class HouseDrillDown extends Component {
     }
   };
 
-  onMemberClick = member => {
-    console.log("Selected: ", member);
+  onMemberClick = id => {
+    if(this.props.characters[id]){
+      this.props.selectCharacter({id});
+    }
   };
 
   isLordLoaded = () => {
@@ -73,6 +75,10 @@ export class HouseDrillDown extends Component {
       .map(id => this.props.characters[id]);
     return (
       <div className="drill-down">
+        <span className="close-drill-down">
+        Hi!
+          <icon></icon>
+        </span>
         <div className="house-title">
           <h3 className="house-name" align="center">
             {this.props.house.name}
