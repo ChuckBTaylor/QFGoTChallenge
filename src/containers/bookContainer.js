@@ -36,7 +36,7 @@ class BookContainer extends Component {
         showFilter: true,
         id: "bookTitle",
         Cell: (title => <span className='book-title'>{this.reformatBookTitle(title.value)}</span>),
-        filterMethod: (filter, row) => row.bookTitle.includes(filter.value)
+        filterMethod: (filter, row) => row.bookTitle.toLowerCase().includes(filter.toLowerCase().value)
       },
       {
         Header: "Number of Pages",
