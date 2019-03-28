@@ -5,7 +5,7 @@ export function isObjectEmpty(obj) {
 }
 
 export function constructQueryStringFromObj(obj){
-  return Object.keys(obj).map(key => key + "=" + obj[key]).join('&');
+  return Object.keys(obj).filter(key => key !== 'id').map(key => key + "=" + obj[key]).join('&');
 }
 
 export function isStringEmpty(str){
