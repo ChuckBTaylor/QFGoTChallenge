@@ -3,7 +3,7 @@ import 'react-table/react-table.css';
 import { connect } from "react-redux";
 import { bookActions } from "../constants/constants";
 import ReactTable from "react-table";
-import { commonFilter } from "../utils/utils";
+import { commonFilter, commonSort } from "../utils/utils";
 
 class BookContainer extends Component {
 
