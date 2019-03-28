@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const HouseDrillDown = props => {
-  return (
-    <div className="house-drill-down drill-down">
-  Hi
-    </div>
-  )
+export class HouseDrillDown extends Component {
+  render() {
+    return (
+      <span className="drill-down">
+        Hi
+    </span>
+    )
+  }
 }
 export default HouseDrillDown;

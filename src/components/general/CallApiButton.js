@@ -7,7 +7,7 @@ const CallApiButton = props => {
   }
 
   return(
-    <button onClick={handleClick}>
+    <button className="" onClick={handleClick}>
       {props.buttonName}
     </button>
   )

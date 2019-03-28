@@ -5,7 +5,8 @@ const initialState = {
   fetching: false,
   list: {},
   error: null,
-  lastPageRequested: 0
+  lastPageRequested: 0,
+  selectedCharacter: null
 };
 
 export function characterReducer(state = initialState, action) {

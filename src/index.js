@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import GoTApp from './GoTApp';
 import * as serviceWorker from './serviceWorker';
+import './index.css';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { characterReducer } from './reducers/characterReducer';
 import createSagaMiddleware from 'redux-saga';

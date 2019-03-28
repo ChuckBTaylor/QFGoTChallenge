@@ -8,7 +8,7 @@ import CallApiButton from '../components/general/CallApiButton';
 
 class HouseContainer extends Component {
 
-  state = { 
+  state = {
     houseFilter: "",
     pageSize: 20
   }
@@ -86,8 +86,8 @@ class HouseContainer extends Component {
       filterMethod: commonFilter
     }];
     return (
-      <div className="house-container">
-        <div className="table-drilldown-container">
+      <div className="house-container domain-container">
+        <span className="table-span">
           <ReactTable
             data={Object.values(this.props.houses)}
             resolveData={data => data.map(this.resolveHouseData)}
@@ -99,11 +99,13 @@ class HouseContainer extends Component {
             onPageSizeChange={this.changePageSize}
             getTdProps={this.tdProps}
           />
+        </span>
+        <div className='api-button'>
+          <CallApiButton
+            onClick={this.getMoreHouses}
+            buttonName={"Get More Houses"}
+          />
         </div>
-        <CallApiButton
-          onClick={this.getMoreHouses}
-          buttonName={"Get More Houses"}
-        />
       </div>
     );
   }
