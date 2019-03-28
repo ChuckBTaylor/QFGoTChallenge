@@ -69,6 +69,7 @@ class CharacterContainer extends Component {
           pageSize={this.state.pageSize}
           onPageSizeChange={this.changePageSize}
           showFilters={true}
+          loading={this.props.fetchingCharacters}
         />
         <CallApiButton
           onClick={this.getMoreCharacters}
@@ -89,7 +90,8 @@ class CharacterContainer extends Component {
 const mapStateToProps = state => {
   return {
     characters: state.characters.list,
-    lastPageRequested: state.characters.lastPageRequested
+    lastPageRequested: state.characters.lastPageRequested,
+    fetchingCharacters: state.characters.fetching
   };
 };
 
