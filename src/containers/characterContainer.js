@@ -3,7 +3,7 @@ import CallApiButton from "../components/general/CallApiButton";
 import { connect } from "react-redux";
 import { characterActions } from "../constants/constants";
 import ReactTable from "react-table";
-import { isStringEmpty, commonFilter } from "../utils/utils";
+import { isStringEmpty, commonFilter, getIdFromUrlString } from "../utils/utils";
 
 class CharacterContainer extends Component {
   state = {
@@ -35,6 +35,20 @@ class CharacterContainer extends Component {
       return false;
     }
     return true;
+  }
+
+  tdProps = (state, rowInfo, column) => {
+    return {
+      onClick: (e, handleOriginal) => {
+        if(column.id === "characterName"){
+          let id = getIdFromUrlString(rowInfo.original.url);
+          this.props.selectCharacter({id});
+        }
+        if (handleOriginal) {
+          handleOriginal();
+        }
+      }
+    }
   }
 
   render() {
@@ -70,6 +84,7 @@ class CharacterContainer extends Component {
           onPageSizeChange={this.changePageSize}
           showFilters={true}
           loading={this.props.fetchingCharacters}
+          getTdProps={this.tdProps}
         />
         <CallApiButton
           onClick={this.getMoreCharacters}
@@ -98,7 +113,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchCharacters: payload =>
-      dispatch({ type: characterActions.CHARACTERS_FETCH_START, payload })
+      dispatch({ type: characterActions.CHARACTERS_FETCH_START, payload }),
+    selectCharacter: payload => dispatch({type: characterActions.SELECT_CHARACTER, payload})
   };
 };
 

@@ -46,11 +46,11 @@ class HouseContainer extends Component {
     return houseData;
   }
 
-  tdProps = (state, rowInfo, column, instance) => {
+  tdProps = (state, rowInfo, column) => {
     return {
       onClick: (e, handleOriginal) => {
         if(column.id === "name"){
-          let houseId = getIdFromUrlString(rowInfo.row._original.url);
+          let houseId = getIdFromUrlString(rowInfo.original.url);
           this.props.selectHouse({id: houseId});
         } else if (column.id === "lordName"){
           if(rowInfo.row.lordName){            
