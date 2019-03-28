@@ -1,13 +1,15 @@
 {
-  "main.js": "/QFGoTChallenge/static/js/main.9ab3dabe.chunk.js",
-  "main.js.map": "/QFGoTChallenge/static/js/main.9ab3dabe.chunk.js.map",
+  "main.css": "/QFGoTChallenge/static/css/main.bd3b15bb.chunk.css",
+  "main.js": "/QFGoTChallenge/static/js/main.6d6b3804.chunk.js",
+  "main.js.map": "/QFGoTChallenge/static/js/main.6d6b3804.chunk.js.map",
   "runtime~main.js": "/QFGoTChallenge/static/js/runtime~main.16fb53f8.js",
   "runtime~main.js.map": "/QFGoTChallenge/static/js/runtime~main.16fb53f8.js.map",
   "static/css/2.158a2283.chunk.css": "/QFGoTChallenge/static/css/2.158a2283.chunk.css",
-  "static/js/2.dc15a1b1.chunk.js": "/QFGoTChallenge/static/js/2.dc15a1b1.chunk.js",
-  "static/js/2.dc15a1b1.chunk.js.map": "/QFGoTChallenge/static/js/2.dc15a1b1.chunk.js.map",
+  "static/js/2.d3adb29d.chunk.js": "/QFGoTChallenge/static/js/2.d3adb29d.chunk.js",
+  "static/js/2.d3adb29d.chunk.js.map": "/QFGoTChallenge/static/js/2.d3adb29d.chunk.js.map",
   "index.html": "/QFGoTChallenge/index.html",
-  "precache-manifest.193dbff20d612a93f21aa3e3d0a0c467.js": "/QFGoTChallenge/precache-manifest.193dbff20d612a93f21aa3e3d0a0c467.js",
+  "precache-manifest.18ff87e1c1ebc284403b18397ab3f838.js": "/QFGoTChallenge/precache-manifest.18ff87e1c1ebc284403b18397ab3f838.js",
   "service-worker.js": "/QFGoTChallenge/service-worker.js",
-  "static/css/2.158a2283.chunk.css.map": "/QFGoTChallenge/static/css/2.158a2283.chunk.css.map"
+  "static/css/2.158a2283.chunk.css.map": "/QFGoTChallenge/static/css/2.158a2283.chunk.css.map",
+  "static/css/main.bd3b15bb.chunk.css.map": "/QFGoTChallenge/static/css/main.bd3b15bb.chunk.css.map"
 }
