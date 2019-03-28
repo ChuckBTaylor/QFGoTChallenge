@@ -7,45 +7,67 @@ import { isStringEmpty } from "../utils/utils";
 
 class CharacterContainer extends Component {
   state = {
-    pageSize: 10
+    pageSize: 10,
+    filterUnknownCulture: false
   };
 
-  buttonClickFromParent = () => {
-    console.log("requesting page" + (+this.props.lastPageRequested + 1))
-    this.props.fetchCharacters({page: (+this.props.lastPageRequested + 1)});
+  getMoreCharacters = () => {
+    this.props.fetchCharacters({ page: (+this.props.lastPageRequested + 1) });
   };
 
   characterValidator = character => {
     character.name = isStringEmpty(character.name) ? (character.aliases[0] + "*") : character.name;
-    character.culture = isStringEmpty(character.culture) ? "Unknown" : character.culture;
     return character;
+  }
+
+  updateCultureFilter = () => {
+    this.setState({ filterUnknownCulture: !this.state.filterUnknownCulture });
   }
 
   changePageSize = pageSize => {
     this.setState({ pageSize });
   }
 
+  filterCharacterByCulture = it => {
+    console.log(this.state.filterUnknownCulture);
+    console.log(it.culture);
+    
+    if (!this.state.filterUnknownCulture)
+      return true;
+    if(isStringEmpty(it.culture)){      
+      return false;
+    }
+    return true;
+  }
+
   render() {
+    const filteredCharacters = this.props.characters.filter(it => this.filterCharacterByCulture(it));
+    console.log(filteredCharacters);
+
     const columns = [{
       Header: "Name",
       accessor: 'name',
       id: 'characterName',
       Footer: "*alias",
       filterable: true,
-      filterMethod: (filter, row) => row.characterName.includes(filter.value)
-    },{
+      filterMethod: (filter, row) => row.characterName.toLowerCase().includes(filter.value.toLowerCase())
+    }, {
       Header: "Gender",
       accessor: 'gender',
       filterable: true
-    },{
+    }, {
       Header: "Culture",
       accessor: 'culture',
-      filterable: true
+      id: 'culture',
+      Cell: (culture => <span>{!isStringEmpty(culture.value) ? culture.value : "unknown"}</span>),
+      filterable: true,
+      filterMethod: (filter, row) => row.culture.toLowerCase().includes(filter.value.toLowerCase()),
+      Footer: <span>Filter Unknown: <input type='checkbox' onChange={this.updateCultureFilter} checked={this.state.filterUnknownCulture} /></span>
     }]
     return (
       <div>
         <ReactTable
-          data={this.props.characters}
+          data={filteredCharacters}
           columns={columns}
           resolveData={data => data.map(row => this.characterValidator(row))}
           pageSize={this.state.pageSize}
@@ -53,7 +75,7 @@ class CharacterContainer extends Component {
           showFilters={true}
         />
         <CallApiButton
-          onClick={this.buttonClickFromParent}
+          onClick={this.getMoreCharacters}
           buttonName={"Get More Characters"}
         />
       </div>
@@ -61,8 +83,13 @@ class CharacterContainer extends Component {
   }
   componentDidMount = () => {
     if (this.props.lastPageRequested < 1)
-      this.props.fetchCharacters({page: 1});
+      this.props.fetchCharacters({ page: 1 });
   };
+
+  componentDidUpdate = () => {
+    console.log(this.props.characters);
+    
+  }
 }
 
 const mapStateToProps = state => {

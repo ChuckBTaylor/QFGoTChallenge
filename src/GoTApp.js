@@ -7,8 +7,8 @@ import { connect } from "react-redux";
 class GoTApp extends Component {
 
   state = {
-    viewBooks: true,
-    viewCharacters: false,
+    viewBooks: false,
+    viewCharacters: true,
     viewHouses: false
   };
 
