@@ -49,11 +49,15 @@ class HouseContainer extends Component {
   tdProps = (state, rowInfo, column, instance) => {
     return {
       onClick: (e, handleOriginal) => {
-        console.log("A Td Element was clicked!");
-        console.log("it produced this event:", e);
-        console.log("It was in this column:", column);
-        console.log("It was in this row:", rowInfo);
-        console.log("It was in this table instance:", instance);
+        if(column.id === "name"){
+          let houseId = getIdFromUrlString(rowInfo.row._original.url);
+          this.props.selectHouse({id: houseId});
+        } else if (column.id === "lordName"){
+          if(rowInfo.row.lordName){            
+            let characterId = getIdFromUrlString(rowInfo.row.currentLord);
+            this.props.selectCharacter({id: characterId})
+          }          
+        }
         if (handleOriginal) {
           handleOriginal();
         }
@@ -74,7 +78,7 @@ class HouseContainer extends Component {
       sortMethod: commonSort,
       Cell: region => (<span>{region.value ? region.value : 'Region unknown'}</span>)
     }, {
-      Header: "Current Lord link",
+      Header: "Current Lord Id",
       accessor: 'currentLord',
       filterable: false,
       show: false
@@ -130,7 +134,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchHouses: payload => dispatch({ type: houseActions.HOUSES_FETCH_START, payload }),
-    fetchCharacter: payload => dispatch({ type: characterActions.FETCH_CHARACTER_START, payload })
+    fetchCharacter: payload => dispatch({ type: characterActions.FETCH_CHARACTER_START, payload }),
+    selectHouse: payload => dispatch({type: houseActions.SELECT_HOUSE, payload}),
+    selectCharacter: payload => dispatch({type: characterActions.SELECT_CHARACTER, payload})
   };
 };
 

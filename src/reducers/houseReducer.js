@@ -1,4 +1,4 @@
-import { houseActions } from "../constants/constants";
+import { houseActions, characterActions } from "../constants/constants";
 import { getIdFromUrlString } from "../utils/utils";
 
 const initialState = {
@@ -19,6 +19,11 @@ export function houseReducer(state = initialState, action) {
       return { ...state, fetching: false, list: { ...state.list, ...newHouses }, lastPageRequested: action.lastPageRequested };
     case houseActions.HOUSES_FETCH_FAILURE:
       return { ...state, fetching: false, error: action.error };
+    case houseActions.SELECT_HOUSE:
+      let selectedHouse = state.list[action.payload.id];
+      return { ...state, selectedHouse };
+    case characterActions.SELECT_CHARACTER:
+      return {...state, selectedHouse: null};
     default:
       // console.log("Failed to match action " + action.type + " from house reducer.");
       return state;

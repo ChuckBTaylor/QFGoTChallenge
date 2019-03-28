@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import './App.css';
 import HouseContainer from './containers/HouseContainer';
 import { CharacterDrillDown } from './components/drillDown/CharacterDrillDown';
+import HouseDrillDown from './components/drillDown/HouseDrillDown';
 
 class GoTApp extends Component {
 
@@ -34,6 +35,9 @@ class GoTApp extends Component {
   }
 
   render() {
+    const isDrillDownOpen = this.props.selectedCharacter || this.props.selectedHouse;
+    console.log("character selected: ", this.props.selectedCharacter);
+    console.log("house selected: ", this.props.selectedHouse);
     
     return (
       <div className="git-app">
@@ -48,10 +52,11 @@ class GoTApp extends Component {
             <button value='houses' onClick={this.changeView} className='view-selector-button'>View Houses</button>
           </span>
         </div>
-        {this.state.viewCharacters ? (<CharacterContainer />) : ''}
-        {this.state.viewBooks ? (<BookContainer />) : ''}
-        {this.state.viewHouses ? (<HouseContainer />) : ''}
+        {this.state.viewCharacters ? (<CharacterContainer isDrillDownOpen={isDrillDownOpen}/>) : ''}
+        {this.state.viewBooks ? (<BookContainer isDrillDownOpen={isDrillDownOpen}/>) : ''}
+        {this.state.viewHouses ? (<HouseContainer isDrillDownOpen={isDrillDownOpen}/>) : ''}
         {this.props.selectedCharacter ? (<CharacterDrillDown character={this.props.selectedCharacter} />) : ''}
+        {this.props.selectedHouse ? (<HouseDrillDown house={this.props.selectedHouse} />) : ''}
       </div>
     );
   }
@@ -59,12 +64,17 @@ class GoTApp extends Component {
   componentDidMount = () => {
     this.props.fetchBooks();
   }
+
+  componentDidUpdate = () => {
+    console.log("GoT Component updated");
+    
+  }
 }
 
 const mapStateToProps = state => {
   return {
-    selectedCharacter: state.characters.selected,
-    selectedHouse: state.houses.selected
+    selectedCharacter: state.characters.selectedCharacter,
+    selectedHouse: state.houses.selectedHouse
   }
 }
 
