@@ -15,9 +15,10 @@ class CharacterContainer extends Component {
     this.props.fetchCharacters({ page: (+this.props.lastPageRequested + 1) });
   };
 
-  characterValidator = character => {
-    character.name = isStringEmpty(character.name) ? (character.aliases[0] + "*") : character.name;
-    return character;
+  getCharacterNameOrAlias = rowInfo => {
+    if(rowInfo.value)
+      return rowInfo.value;
+    return rowInfo.original.aliases[0]+"*";
   }
 
   updateCultureFilter = () => {
@@ -63,7 +64,7 @@ class CharacterContainer extends Component {
   }
 
   createBookList = rowInfo => {
-    return rowInfo.row.books.map(bookUrl => getIdFromUrlString(bookUrl)).filter(bookId => !!this.props.books[bookId]).map(bookId => (<li key={generateListKey('books-appeared-in-table', `${bookId}`)}>{this.props.books[bookId].name}</li>));
+    return rowInfo.row.books.map(bookUrl => getIdFromUrlString(bookUrl)).filter(bookId => !!this.props.books[bookId]).map(bookId => (<li className="unclickable" key={generateListKey('books-appeared-in-table', `${bookId}`)}>{this.props.books[bookId].name}</li>));
   }
 
   render() {
@@ -75,7 +76,8 @@ class CharacterContainer extends Component {
       id: 'characterName',
       Footer: "*alias",
       filterable: true,
-      filterMethod: commonFilter
+      filterMethod: commonFilter,
+      Cell: name => (<span>{this.getCharacterNameOrAlias(name)}</span>)
     }, {
       Header: "Gender",
       accessor: 'gender',
@@ -102,7 +104,6 @@ class CharacterContainer extends Component {
           <ReactTable
             data={filteredCharacters}
             columns={columns}
-            resolveData={data => data.map(row => this.characterValidator(row))}
             pageSize={this.state.pageSize}
             onPageSizeChange={this.changePageSize}
             showFilters={true}
