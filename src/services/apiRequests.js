@@ -1,7 +1,8 @@
 import axios from "axios";
+import { isObjectEmpty, constructQueryStringFromObj } from "../utils/utils";
 
 export default function () {
-  const API_ROOT = "https://www.anapioficeandfire.com/api/";
+  const API_ROOT = "https://www.anapioficeandfire.com/api";
   const requestInfo = {
     method: 'GET',
     headers: {
@@ -22,9 +23,10 @@ export default function () {
     },
 
     characters: {
-      fetchAll: request => {        
+      fetch: payload => {
+        let queryString = !isObjectEmpty(payload) ? ('?' + constructQueryStringFromObj(payload)): '';     
         let method = "get";
-        let url = API_ROOT + "/characters";
+        let url = API_ROOT + "/characters" + queryString;
         return axios({
           method, url
         })

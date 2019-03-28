@@ -7,12 +7,16 @@ import ReactTable from "react-table";
 class BookContainer extends Component {
 
   state = {
-    bookFilter: ""
+    bookFilter: "",
+    pageSize: 15
   }
 
   updateFilter = e => {
     this.setState({bookFilter: e.target.value});
+  }
 
+  changePageSize = pageSize => {
+    this.setState({pageSize});    
   }
 
   reformatBookTitle = title => {
@@ -25,7 +29,6 @@ class BookContainer extends Component {
   };
 
   render() {
-    const books = this.props.books.filter(book => book.name.includes(this.state.bookFilter));
     const columns = [
       {
         Header: "Title",
@@ -33,27 +36,27 @@ class BookContainer extends Component {
         showFilter: true,
         id: "bookTitle",
         Cell: (title => <span className='book-title'>{this.reformatBookTitle(title.value)}</span>),
-        filterMethod: (filter, row, column) => {return true},
-        filterRender: ({filter, onFilterChange}) => <select onChange={event => onFilterChange(event.target.value)} value={filter ? filter.value : ''}></select>
+        filterMethod: (filter, row) => row.bookTitle.includes(filter.value)
       },
       {
         Header: "Number of Pages",
         accessor: "numberOfPages",
         id: "numberOfPagesInBook",
-        showFilter: true
+        filterable: false
       }
     ];
     return (
       <div className="book-container">
-        <label htmlFor="book-filter-input">Filter Books by Title: </label>
-        <input id="book-filter-input" type='text' value={this.state.bookFilter} onChange={this.updateFilter} />
         <ReactTable
-          data={books}
+          data={this.props.books}
           columns={columns}
           loading={this.props.fetchingBooks}
           showFilters={true}
-        />
-        
+          filterable={true}
+          pageSize={this.state.pageSize}
+          onPageSizeChange={this.changePageSize}
+          pageSizeOptions={[5, 10, 15]}
+        />     
       </div>
     );
   }

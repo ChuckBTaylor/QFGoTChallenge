@@ -11,8 +11,8 @@ export function characterReducer(state = initialState, action) {
   switch (action.type) {
     case characterActions.CHARACTERS_FETCH_START:
       return { ...state, fetching: true, error: null };
-    case characterActions.CHARACTERS_FETCH_SUCCESS:
-      return { ...state, fetching: false, list: action.data.data };
+    case characterActions.CHARACTERS_FETCH_SUCCESS:    
+      return { ...state, fetching: false, list: state.list.concat(action.data.data), lastPageRequested: action.lastPageRequested };
     case characterActions.CHARACTERS_FETCH_FAILURE:
       return { ...state, fetching: false, characters: [], error: action.error };
     default:
