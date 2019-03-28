@@ -78,6 +78,7 @@ class HouseContainer extends Component {
           showFilters={true}
           filterable={true}
           pageSize={this.state.pageSize}
+          onPageSizeChange={this.changePageSize}
         />
         <CallApiButton
           onClick={this.getMoreHouses}
