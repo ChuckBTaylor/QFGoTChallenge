@@ -3,7 +3,7 @@ import CallApiButton from "../components/general/CallApiButton";
 import { connect } from "react-redux";
 import { characterActions } from "../constants/constants";
 import ReactTable from "react-table";
-import { isStringEmpty } from "../utils/utils";
+import { isStringEmpty, commonFilter } from "../utils/utils";
 
 class CharacterContainer extends Component {
   state = {
@@ -45,7 +45,7 @@ class CharacterContainer extends Component {
       id: 'characterName',
       Footer: "*alias",
       filterable: true,
-      filterMethod: (filter, row) => row.characterName.toLowerCase().includes(filter.value.toLowerCase())
+      filterMethod: commonFilter
     }, {
       Header: "Gender",
       accessor: 'gender',
@@ -56,7 +56,7 @@ class CharacterContainer extends Component {
       id: 'culture',
       Cell: (culture => <span>{!isStringEmpty(culture.value) ? culture.value : "unknown"}</span>),
       filterable: true,
-      filterMethod: (filter, row) => row.culture.toLowerCase().includes(filter.value.toLowerCase()),
+      filterMethod: commonFilter,
       Footer: <span>Filter Unknown: <input type='checkbox' onChange={this.updateCultureFilter} checked={this.state.filterUnknownCulture} /></span>
     }]
     return (

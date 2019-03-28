@@ -3,6 +3,7 @@ import 'react-table/react-table.css';
 import { connect } from "react-redux";
 import { bookActions } from "../constants/constants";
 import ReactTable from "react-table";
+import { commonFilter } from "../utils/utils";
 
 class BookContainer extends Component {
 
@@ -41,7 +42,7 @@ class BookContainer extends Component {
         showFilter: true,
         id: "bookTitle",
         Cell: (title => <span className='book-title'>{this.reformatBookTitle(title.value)}</span>),
-        filterMethod: (filter, row) => row.bookTitle.toLowerCase().includes(filter.toLowerCase().value)
+        filterMethod: commonFilter
       },
       {
         Header: "Number of Pages",

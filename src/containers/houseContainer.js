@@ -3,6 +3,7 @@ import 'react-table/react-table.css';
 import { connect } from "react-redux";
 import { houseActions } from "../constants/constants";
 import ReactTable from "react-table";
+import { commonFilter } from "../utils/utils";
 
 class HouseContainer extends Component {
 
@@ -36,10 +37,13 @@ class HouseContainer extends Component {
   render() {
     const columns = [{
       Header: "Name",
-      accessor: 'name'
+      accessor: 'name',
+      filterMethod: commonFilter
+      // filterMethod: (filter,row) => row.name.toLowerCase().includes(filter.value.toLowerCase())
     },{
       Header: "Region",
-      accessor: 'region'
+      accessor: 'region',
+      filterMethod: commonFilter
     },{
       Header: "Current Lord",
       accessor: 'currentLord',

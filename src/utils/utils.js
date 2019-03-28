@@ -16,3 +16,7 @@ export function getIdFromUrl(obj){
   let splitObj = obj.url.split('/');
   return +splitObj[splitObj.length - 1];
 }
+
+export function commonFilter(filter, row, column){
+  return row[column.id].toLowerCase().includes(filter.value.toLowerCase());  
+}
