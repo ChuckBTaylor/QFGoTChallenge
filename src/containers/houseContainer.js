@@ -81,12 +81,14 @@ class HouseContainer extends Component {
     const columns = [{
       Header: "Name",
       accessor: 'name',
-      filterMethod: commonFilter
+      filterMethod: commonFilter,
+      className: 'table-item clickable'
     }, {
       Header: "Region",
       accessor: 'region',
       filterMethod: commonFilter,
       sortMethod: commonSort,
+      className: 'table-item unclickable',
       Cell: region => (<span>{region.value ? region.value : 'Region unknown'}</span>)
     }, {
       Header: "Current Lord Id",
@@ -102,6 +104,7 @@ class HouseContainer extends Component {
     }];
     return (
       <div className={domainContainerClassName}>
+      <h2 align='center'>The Houses of "Game of Thrones"</h2>
         <span className="table-span">
           <ReactTable
             data={Object.values(this.props.houses)}

@@ -35,23 +35,21 @@ class GoTApp extends Component {
   }
 
   render() {
-    const isDrillDownOpen = this.props.selectedCharacter || this.props.selectedHouse;    
+    const isDrillDownOpen = this.props.selectedCharacter || this.props.selectedHouse;
+    const baseClassName = "view-selector-button";
+    const bookButtonClassName = baseClassName + (this.state.viewBooks ? " viewing" : '');
+    const houseButtonClassName = baseClassName + (this.state.viewHouses ? " viewing" : '');
+    const characterButtonClassName = baseClassName + (this.state.viewCharacters ? " viewing" : '');
     return (
       <div className="git-app">
         <div id="domain-selector" align='center'>
-          <span>
-            <button value='books' onClick={this.changeView} className="view-selector-button">View Books</button>
-          </span>
-          <span>
-            <button value='characters' onClick={this.changeView} className='view-selector-button'>View Characters</button>
-          </span>
-          <span>
-            <button value='houses' onClick={this.changeView} className='view-selector-button'>View Houses</button>
-          </span>
+          {!this.state.viewBooks ? <button value='books' onClick={this.changeView} disabled={this.state.viewBooks} className={bookButtonClassName}>{this.state.viewBooks ? "Viewing Books" : "View Books"}</button> : ''}
+          {!this.state.viewCharacters ? <button value='characters' onClick={this.changeView} disabled={this.state.viewCharacters} className={characterButtonClassName}>{this.state.viewCharacters ? "Viewing Characters" : "View Characters"}</button> : ''}
+          {!this.state.viewHouses ? <button value='houses' onClick={this.changeView} disabled={this.state.viewHouses} className={houseButtonClassName}>{this.state.viewHouses ? "Viewing Houses" : "View Houses"}</button>: ''}
         </div>
-        {this.state.viewCharacters ? (<CharacterContainer isDrillDownOpen={isDrillDownOpen}/>) : ''}
-        {this.state.viewBooks ? (<BookContainer isDrillDownOpen={isDrillDownOpen}/>) : ''}
-        {this.state.viewHouses ? (<HouseContainer isDrillDownOpen={isDrillDownOpen}/>) : ''}
+        {this.state.viewCharacters ? (<CharacterContainer isDrillDownOpen={isDrillDownOpen} />) : ''}
+        {this.state.viewBooks ? (<BookContainer isDrillDownOpen={isDrillDownOpen} />) : ''}
+        {this.state.viewHouses ? (<HouseContainer isDrillDownOpen={isDrillDownOpen} />) : ''}
         {this.props.selectedCharacter ? (<CharacterDrillDown character={this.props.selectedCharacter} />) : ''}
         {this.props.selectedHouse ? (<HouseDrillDown house={this.props.selectedHouse} />) : ''}
       </div>
@@ -62,7 +60,7 @@ class GoTApp extends Component {
     this.props.fetchBooks();
   }
 
-  componentDidUpdate = () => {    
+  componentDidUpdate = () => {
   }
 }
 

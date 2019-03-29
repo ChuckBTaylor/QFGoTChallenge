@@ -44,3 +44,21 @@ ul.in-table-list {
 .material-icons.close-drill-down{
   color: red;
 }
+
+#domain-selector button{
+  margin: 5px;
+  padding: 5px
+}
+
+.unclickable {
+  cursor: default;
+}
+
+.clickable {
+
+}
+
+.clickable:hover {
+  font-weight: bold;
+  cursor: pointer;
+}

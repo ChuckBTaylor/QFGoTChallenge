@@ -61,6 +61,7 @@ class BookContainer extends Component {
     ];
     return (
       <div className={domainContainerClassName}>
+        <h2 align='center'>"Game of Thrones" books</h2>
         <span className="table-span">
           <ReactTable
             data={Object.values(this.props.books)}

@@ -66,13 +66,13 @@ class CharacterContainer extends Component {
   createBookList = rowInfo => {
     //rowInfo only has urls\
     console.log(rowInfo);
-    let povBooks = rowInfo.original.povBooks.map(bookUrl => getIdFromUrlString(bookUrl)).filter(bookId =>  !!this.props.books[bookId]).map(bookId => (<li className="unclickable" key={generateListKey('books-appeared-in-table', `${bookId}`)}>{this.props.books[bookId].name}*</li>))
+    let povBooks = rowInfo.original.povBooks.map(bookUrl => getIdFromUrlString(bookUrl)).filter(bookId => !!this.props.books[bookId]).map(bookId => (<li className="unclickable" key={generateListKey('books-appeared-in-table', `${bookId}`)}>{this.props.books[bookId].name}*</li>))
     return povBooks.concat(rowInfo.row.books.map(bookUrl => getIdFromUrlString(bookUrl)).filter(bookId => !!this.props.books[bookId]).map(bookId => (<li className="unclickable" key={generateListKey('books-appeared-in-table', `${bookId}`)}>{this.props.books[bookId].name}</li>)));
   }
 
   constructBooksAppearedIn = props => {
 
-    return(<span></span>)
+    return (<span></span>)
   }
 
   render() {
@@ -109,6 +109,7 @@ class CharacterContainer extends Component {
     }]
     return (
       <div className={domainContainerClassName}>
+        <h2 align='center'>Characters in the "Game of Thrones" series</h2>
         <span className="table-span">
           <ReactTable
             data={filteredCharacters}
