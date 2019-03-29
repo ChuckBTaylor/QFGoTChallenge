@@ -1,0 +1,25 @@
+button.query-api {
+  display: inline-block;
+  padding: 0.5em 3em;
+  border: 0.16em solid #FFFFFF;
+  margin: 0 0.3em 0.3em 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Cormorant SC', serif;
+  font-weight: 400;
+  color: #222222;
+  text-align: center;
+  transition: all 0.15s;
+  font-size: 1.2em;
+}
+
+button.query-api:hover {
+  color: #666666;
+  border-color: #DDDDDD;
+}
+
+button.query-api:active {
+  color: #BBBBBB;
+  border-color: #BBBBBB;
+}
