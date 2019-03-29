@@ -25,8 +25,8 @@ export function characterReducer(state = initialState, action) {
     case characterActions.FETCH_CHARACTER_SUCCESS:
       const newCharacter = action.data.data;
       newCharacter.id = getIdFromUrlString(newCharacter.url);
-      const characterList = state.list;
-      characterList[newCharacter.id] = newCharacter;
+      const characterList = {...state.list};
+      characterList[newCharacter.id] = newCharacter;      
       return { ...state, list: characterList };
     case characterActions.FETCH_CHARACTER_FAILURE:
       console.log(action.error);

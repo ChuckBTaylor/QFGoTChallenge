@@ -25,7 +25,7 @@ export function houseReducer(state = initialState, action) {
     case houseActions.FETCH_HOUSE_SUCCESS:
       const newHouse = action.data.data;
       newHouse.id = getIdFromUrlString(newHouse.url);
-      const houseList = state.list;
+      const houseList = {...state.list};
       houseList[newHouse.id] = newHouse;
       return { ...state, list: houseList };
     case houseActions.FETCH_HOUSE_FAILURE:

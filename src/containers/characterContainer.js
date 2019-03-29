@@ -16,9 +16,9 @@ class CharacterContainer extends Component {
   };
 
   getCharacterNameOrAlias = rowInfo => {
-    if(rowInfo.value)
+    if (rowInfo.value)
       return rowInfo.value;
-    return rowInfo.original.aliases[0]+"*";
+    return rowInfo.original.aliases[0] + "*";
   }
 
   updateCultureFilter = () => {
@@ -64,6 +64,7 @@ class CharacterContainer extends Component {
   }
 
   createBookList = rowInfo => {
+    //rowInfo only has urls
     return rowInfo.row.books.map(bookUrl => getIdFromUrlString(bookUrl)).filter(bookId => !!this.props.books[bookId]).map(bookId => (<li className="unclickable" key={generateListKey('books-appeared-in-table', `${bookId}`)}>{this.props.books[bookId].name}</li>));
   }
 

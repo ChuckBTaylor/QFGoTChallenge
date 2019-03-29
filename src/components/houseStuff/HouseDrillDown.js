@@ -128,8 +128,6 @@ class HouseDrillDown extends Component {
 
   componentDidMount = () => {
     this.checkForAndFetchCharacters();
-    console.log(this.props.appHistory);
-
   };
 
   componentDidUpdate = () => {
