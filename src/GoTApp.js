@@ -41,7 +41,7 @@ class GoTApp extends Component {
     const houseButtonClassName = baseClassName + (this.state.viewHouses ? " viewing" : '');
     const characterButtonClassName = baseClassName + (this.state.viewCharacters ? " viewing" : '');
     return (
-      <div className="git-app">
+      <div className="got-app">
         <div id="domain-selector" align='center'>
           <button value='books' hidden={this.state.viewBooks} onClick={this.changeView} className={bookButtonClassName}>{this.state.viewBooks ? "Viewing Books" : "View Books"}</button>
           <button value='characters' onClick={this.changeView} hidden={this.state.viewCharacters} className={characterButtonClassName}>{this.state.viewCharacters ? "Viewing Characters" : "View Characters"}</button>

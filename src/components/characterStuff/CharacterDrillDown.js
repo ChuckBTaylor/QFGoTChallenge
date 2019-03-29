@@ -50,12 +50,12 @@ class CharacterDrillDown extends Component {
       <div className="drill-down">
         <span className="drill-down-navigation" >
         {this.showBackButton() ?
-            <i className="material-icons drill-down-back" onClick={this.handleBackClick}>
+            <i className="material-icons drill-down-back clickable" onClick={this.handleBackClick}>
               arrow_back
             </i>
             : ''
           }
-          <i className="material-icons close-drill-down" onClick={this.props.closeDrillDown}>close</i>
+          <i className="material-icons close-drill-down clickable" onClick={this.props.closeDrillDown}>close</i>
         </span>
         <div className="character-title">
           <h3 className="character-name" align="center">
