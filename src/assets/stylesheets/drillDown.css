@@ -1,0 +1,28 @@
+
+div.title {
+  border-bottom: thick double #000000;
+
+}
+
+div.drill-down {
+  background-color: #DDDDDD;
+  font-family: 'Cormorant SC', serif;
+  margin-top: 5em;
+  font-size: 1.5em;
+}
+
+.drill-down-back {
+  float: left;
+}
+
+.close-drill-down {
+  float: right;
+}
+
+.material-icons.drill-down-back {
+  color: green;
+}
+
+.material-icons.close-drill-down{
+  color: red;
+}

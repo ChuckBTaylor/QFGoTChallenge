@@ -29,22 +29,6 @@ ul.in-table-list {
   padding: 0
 }
 
-.drill-down-back {
-  float: left;
-}
-
-.close-drill-down {
-  float: right;
-}
-
-.material-icons.drill-down-back {
-  color: green;
-}
-
-.material-icons.close-drill-down{
-  color: red;
-}
-
 #domain-selector button{
   display: inline-block;
   padding: 0.35em 1.2em;
@@ -72,11 +56,10 @@ ul.in-table-list {
 }
 
 .table-title {
-  font-family: 'Germania One', cursive;
+  font-family: 'Cormorant SC', serif;
   font-size: 40px;
 }
 
 .got-app {
   background-color: rgba(150, 150, 150, 1);
-
 }

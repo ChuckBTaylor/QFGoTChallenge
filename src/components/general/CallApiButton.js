@@ -1,4 +1,5 @@
 import React from 'react';
+import './CallApiButton.css';
 
 const CallApiButton = props => {
   const handleClick = () => {
@@ -7,7 +8,7 @@ const CallApiButton = props => {
   }
 
   return(
-    <button className="" onClick={handleClick}>
+    <button className="query-api" onClick={handleClick}>
       {props.buttonName}
     </button>
   )

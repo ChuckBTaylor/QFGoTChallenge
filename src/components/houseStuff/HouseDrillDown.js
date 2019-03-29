@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import '../../assets/stylesheets/drillDown.css';
 import { getIdFromUrlString } from "../../utils/utils";
 import { houseActions, characterActions, generalActions } from "../../constants/constants";
 import SwornMemberList from "./SwornMemberList";
@@ -96,20 +97,21 @@ class HouseDrillDown extends Component {
               arrow_back
             </i>
             : ''
-          }
+          }{this.showBackButton() ? <span onClick={this.handleBackClick} className="clickable">Back</span> : ''}
           <i className="material-icons close-drill-down clickable" onClick={this.props.closeDrillDown}>
             close
           </i>
+          <span onClick={this.props.closeDrillDown} className="close-drill-down clickable">Close</span>
         </span>
-        <span className="house-title">
-          <h3 className="house-name" align="center">
+        <div className="house-title title">
+          <h3 className="house-name name" align="center">
             {this.props.house.name}
           </h3>
-          <h4 className="house-words" align="center">
+          <h4 className="house-words words" align="center">
             {words}
           </h4>
-        </span>
-        <div className="house-info">
+        </div>
+        <div className="house-info info">
           <p className={this.isLordLoaded() ? "clickable" : "unclickable"} onClick={this.selectLord}>Current Lord: {lordName}</p>
           <p>Coat of Arms: {coatOfArms}</p>
           <p className={!!overlord ? "clickable" : "unclickable"} onClick={this.selectOverlord}>Overlord: {overlordName}</p>

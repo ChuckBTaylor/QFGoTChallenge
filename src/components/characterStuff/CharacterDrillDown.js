@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import '../../assets/stylesheets/drillDown.css';
 import { generateListKey } from "../../utils/utils";
 import { generalActions } from "../../constants/constants";
 import { characterActions, houseActions } from '../../constants/constants';
@@ -48,17 +49,18 @@ class CharacterDrillDown extends Component {
     const aliases = this.constructAliases();
     return (
       <div className="drill-down">
-        <span className="drill-down-navigation" >
+        <span className="drill-down-navigation unclickable" >
         {this.showBackButton() ?
             <i className="material-icons drill-down-back clickable" onClick={this.handleBackClick}>
               arrow_back
             </i>
             : ''
-          }
+          }{this.showBackButton() ? <span onClick={this.handleBackClick} className="clickable">Back</span> : ''}
           <i className="material-icons close-drill-down clickable" onClick={this.props.closeDrillDown}>close</i>
+          <span onClick={this.props.closeDrillDown} className="close-drill-down clickable">Close</span>
         </span>
-        <div className="character-title">
-          <h3 className="character-name" align="center">
+        <div className="character-title title">
+          <h3 className="character-name name" align="center">
             {name}
           </h3>
           <h4 align="center">
@@ -66,7 +68,7 @@ class CharacterDrillDown extends Component {
             {culture ? "" : "from unknwon"}
           </h4>
         </div>
-        <div className="character-info">
+        <div className="character-info info">
           <p>
             Born:{" "}
             {this.props.character.born ? this.props.character.born : "unknwon"}
