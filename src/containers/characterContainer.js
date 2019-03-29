@@ -64,8 +64,15 @@ class CharacterContainer extends Component {
   }
 
   createBookList = rowInfo => {
-    //rowInfo only has urls
-    return rowInfo.row.books.map(bookUrl => getIdFromUrlString(bookUrl)).filter(bookId => !!this.props.books[bookId]).map(bookId => (<li className="unclickable" key={generateListKey('books-appeared-in-table', `${bookId}`)}>{this.props.books[bookId].name}</li>));
+    //rowInfo only has urls\
+    console.log(rowInfo);
+    let povBooks = rowInfo.original.povBooks.map(bookUrl => getIdFromUrlString(bookUrl)).filter(bookId =>  !!this.props.books[bookId]).map(bookId => (<li className="unclickable" key={generateListKey('books-appeared-in-table', `${bookId}`)}>{this.props.books[bookId].name}*</li>))
+    return povBooks.concat(rowInfo.row.books.map(bookUrl => getIdFromUrlString(bookUrl)).filter(bookId => !!this.props.books[bookId]).map(bookId => (<li className="unclickable" key={generateListKey('books-appeared-in-table', `${bookId}`)}>{this.props.books[bookId].name}</li>)));
+  }
+
+  constructBooksAppearedIn = props => {
+
+    return(<span></span>)
   }
 
   render() {
@@ -97,7 +104,8 @@ class CharacterContainer extends Component {
       accessor: "books",
       Cell: books => (<span><ul className='in-table-list'>{this.createBookList(books)}</ul></span>),
       filterable: true,
-      filterMethod: this.filterBooksAppearedIn
+      filterMethod: this.filterBooksAppearedIn,
+      Footer: <span>*Point of View book</span>
     }]
     return (
       <div className={domainContainerClassName}>
