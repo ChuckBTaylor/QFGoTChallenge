@@ -41,7 +41,6 @@ class HouseContainer extends Component {
 
   resolveHouseData = houseData => {
     // console.log(houseData);
-    
     let lordId = getIdFromUrlString(houseData.currentLord);
     if (this.props.characters[lordId])
       houseData.lordName = this.props.characters[lordId].name;
@@ -70,6 +69,13 @@ class HouseContainer extends Component {
     }
   }
 
+  constructLordNameCell = props => {
+    const hasLordName = !!props.row.currentLord && props.row.lordName;
+    const className = hasLordName ? "clickable" : "unclickable";
+    const lordName = !!props.row.currentLord ? (!!props.row.lordName ? props.row.lordName : "Loading...") : "unknown";
+    return (<span className={className}>{lordName}</span>)
+  }
+
   render() {
     const domainContainerClassName = "domain-container " + (this.props.isDrillDownOpen ? "drill-down-open" : "drill-down-closed");
     const columns = [{
@@ -91,7 +97,7 @@ class HouseContainer extends Component {
       Header: "Current Lord",
       accessor: 'lordName',
       filterable: true,
-      Cell: lordName => (<span>{lordName.value ? lordName.value : "Name unknown"}</span>),
+      Cell: this.constructLordNameCell,
       filterMethod: commonFilter
     }];
     return (
