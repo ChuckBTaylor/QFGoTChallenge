@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/QFGoTChallenge/precache-manifest.7a700c1127e8ad726730d00151a914c0.js"
+  "/QFGoTChallenge/precache-manifest.269a862102008606dcc1894421874b15.js"
 );
 
 workbox.clientsClaim();
