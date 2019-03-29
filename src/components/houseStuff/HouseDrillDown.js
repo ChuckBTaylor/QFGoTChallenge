@@ -62,7 +62,9 @@ class HouseDrillDown extends Component {
   };
 
   isLordLoaded = () => {
-    return this.props.currentLord && this.getLordFromCharacters();
+    console.log(this.props);
+    
+    return !!this.props.house.currentLord && this.getLordFromCharacters();
   };
 
   render() {
@@ -90,12 +92,12 @@ class HouseDrillDown extends Component {
       <div className="drill-down">
         <span className="drill-down-navigation" >
           {this.showBackButton() ?
-            <i className="material-icons drill-down-back" onClick={this.handleBackClick}>
+            <i className="material-icons drill-down-back clickable" onClick={this.handleBackClick}>
               arrow_back
             </i>
             : ''
           }
-          <i className="material-icons close-drill-down" onClick={this.props.closeDrillDown}>
+          <i className="material-icons close-drill-down clickable" onClick={this.props.closeDrillDown}>
             close
           </i>
         </span>
@@ -108,9 +110,9 @@ class HouseDrillDown extends Component {
           </h4>
         </span>
         <div className="house-info">
-          <p onClick={this.selectLord}>Current Lord: {lordName}</p>
+          <p className={this.isLordLoaded() ? "clickable" : "unclickable"} onClick={this.selectLord}>Current Lord: {lordName}</p>
           <p>Coat of Arms: {coatOfArms}</p>
-          <p onClick={this.selectOverlord}>Overlord: {overlordName}</p>
+          <p className={!!overlord ? "clickable" : "unclickable"} onClick={this.selectOverlord}>Overlord: {overlordName}</p>
         </div>
         Sworn Members:
         {this.props.house.swornMembers.length ? (

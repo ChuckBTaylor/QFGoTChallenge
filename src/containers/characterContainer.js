@@ -84,6 +84,7 @@ class CharacterContainer extends Component {
       id: 'characterName',
       Footer: "*alias",
       filterable: true,
+      className: "clickable",
       filterMethod: commonFilter,
       Cell: name => (<span>{this.getCharacterNameOrAlias(name)}</span>)
     }, {
@@ -109,7 +110,7 @@ class CharacterContainer extends Component {
     }]
     return (
       <div className={domainContainerClassName}>
-        <h2 align='center'>Characters in the "Game of Thrones" series</h2>
+        <h2 className='table-title' align='center'>Characters in the "Game of Thrones" series</h2>
         <span className="table-span">
           <ReactTable
             data={filteredCharacters}

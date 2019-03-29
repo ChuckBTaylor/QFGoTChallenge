@@ -10,7 +10,7 @@ class HouseContainer extends Component {
 
   state = {
     houseFilter: "",
-    pageSize: 20
+    pageSize: 10
   }
 
   getMoreHouses = () => {
@@ -52,9 +52,9 @@ class HouseContainer extends Component {
       onClick: (e, handleOriginal) => {
         if (column.id === "name") {
           let houseId = getIdFromUrlString(rowInfo.original.url);
-          if(!this.props.selectedHouse || houseId !== this.props.selectedHouse.id){
+          if (!this.props.selectedHouse || houseId !== this.props.selectedHouse.id) {
             this.props.selectHouse({ id: houseId });
-          }else
+          } else
             console.log("House already selected");
         } else if (column.id === "lordName") {
           if (rowInfo.row.lordName) {
@@ -104,7 +104,7 @@ class HouseContainer extends Component {
     }];
     return (
       <div className={domainContainerClassName}>
-      <h2 align='center'>The Houses of "Game of Thrones"</h2>
+        <h2 className='table-title' align='center'>The Houses of "Game of Thrones"</h2>
         <span className="table-span">
           <ReactTable
             data={Object.values(this.props.houses)}

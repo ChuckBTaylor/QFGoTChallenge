@@ -43,9 +43,9 @@ class GoTApp extends Component {
     return (
       <div className="git-app">
         <div id="domain-selector" align='center'>
-          {!this.state.viewBooks ? <button value='books' onClick={this.changeView} disabled={this.state.viewBooks} className={bookButtonClassName}>{this.state.viewBooks ? "Viewing Books" : "View Books"}</button> : ''}
-          {!this.state.viewCharacters ? <button value='characters' onClick={this.changeView} disabled={this.state.viewCharacters} className={characterButtonClassName}>{this.state.viewCharacters ? "Viewing Characters" : "View Characters"}</button> : ''}
-          {!this.state.viewHouses ? <button value='houses' onClick={this.changeView} disabled={this.state.viewHouses} className={houseButtonClassName}>{this.state.viewHouses ? "Viewing Houses" : "View Houses"}</button>: ''}
+          <button value='books' hidden={this.state.viewBooks} onClick={this.changeView} className={bookButtonClassName}>{this.state.viewBooks ? "Viewing Books" : "View Books"}</button>
+          <button value='characters' onClick={this.changeView} hidden={this.state.viewCharacters} className={characterButtonClassName}>{this.state.viewCharacters ? "Viewing Characters" : "View Characters"}</button>
+          <button value='houses' onClick={this.changeView} hidden={this.state.viewHouses} className={houseButtonClassName}>{this.state.viewHouses ? "Viewing Houses" : "View Houses"}</button>
         </div>
         {this.state.viewCharacters ? (<CharacterContainer isDrillDownOpen={isDrillDownOpen} />) : ''}
         {this.state.viewBooks ? (<BookContainer isDrillDownOpen={isDrillDownOpen} />) : ''}
