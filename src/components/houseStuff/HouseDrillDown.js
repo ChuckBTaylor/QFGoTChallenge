@@ -7,14 +7,14 @@ import SwornMemberList from "./SwornMemberList";
 
 class HouseDrillDown extends Component {
   checkForAndFetchCharacters = () => {
-    const overlord = getIdFromUrlString(this.props.house.overlord);
-    if (overlord && !this.props.houses[overlord]) {
+    const overlordId = getIdFromUrlString(this.props.house.overlord);
+    if (overlordId && !this.props.houses[overlordId]) {
       this.props.fetchHouse({
         id: getIdFromUrlString(this.props.house.overlord)
       });
     }
-    this.props.house.swornMembers.forEach(member => {
-      const id = getIdFromUrlString(member);
+    this.props.house.swornMembers.forEach(memberUrl => {
+      const id = getIdFromUrlString(memberUrl);
       if (!this.props.characters[id]) {
         this.props.fetchCharacter({ id });
       }
@@ -49,10 +49,10 @@ class HouseDrillDown extends Component {
 
   handleBackClick = () => {
     const historyObj = this.props.appHistory[1];
-    if(historyObj.domain === "character"){
-      this.props.backSelectCharacter({id: historyObj.id});
-    } else if (historyObj.domain === "house"){
-      this.props.backSelectHouse({id: historyObj.id});
+    if (historyObj.domain === "character") {
+      this.props.backSelectCharacter({ id: historyObj.id });
+    } else if (historyObj.domain === "house") {
+      this.props.backSelectHouse({ id: historyObj.id });
     }
   }
 
@@ -63,8 +63,6 @@ class HouseDrillDown extends Component {
   };
 
   isLordLoaded = () => {
-    console.log(this.props);
-    
     return !!this.props.house.currentLord && this.getLordFromCharacters();
   };
 
@@ -85,10 +83,6 @@ class HouseDrillDown extends Component {
     if (overlord) {
       overlordName = overlord.name;
     }
-    const members = this.props.house.swornMembers
-      .map(member => getIdFromUrlString(member))
-      .filter(id => !!this.props.characters[id])
-      .map(id => this.props.characters[id]);
     return (
       <div className="drill-down">
         <span className="drill-down-navigation" >
@@ -120,7 +114,7 @@ class HouseDrillDown extends Component {
         {this.props.house.swornMembers.length ? (
           <SwornMemberList
             onMemberClick={this.onMemberClick}
-            members={members}
+            members={this.props.house.swornMembers}
             characters={this.props.characters}
           />
         ) : (
@@ -157,8 +151,8 @@ const mapDispatchToProps = dispatch => {
     fetchCharacter: payload =>
       dispatch({ type: characterActions.FETCH_CHARACTER_START, payload }),
     closeDrillDown: () => dispatch({ type: generalActions.CLOSE_DRILL_DOWN }),
-    backSelectCharacter: payload => dispatch({type: characterActions.BACK_SELECT_CHARACTER, payload}),
-    backSelectHouse: payload => dispatch({type: houseActions.BACK_SELECT_HOUSE, payload})
+    backSelectCharacter: payload => dispatch({ type: characterActions.BACK_SELECT_CHARACTER, payload }),
+    backSelectHouse: payload => dispatch({ type: houseActions.BACK_SELECT_HOUSE, payload })
   };
 };
 export default connect(
