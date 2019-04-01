@@ -7,14 +7,14 @@ import SwornMemberList from "./SwornMemberList";
 
 class HouseDrillDown extends Component {
   checkForAndFetchCharacters = () => {
-    const overlord = getIdFromUrlString(this.props.house.overlord);
-    if (overlord && !this.props.houses[overlord]) {
+    const overlordId = getIdFromUrlString(this.props.house.overlord);
+    if (overlordId && !this.props.houses[overlordId]) {
       this.props.fetchHouse({
         id: getIdFromUrlString(this.props.house.overlord)
       });
     }
-    this.props.house.swornMembers.forEach(member => {
-      const id = getIdFromUrlString(member);
+    this.props.house.swornMembers.forEach(memberUrl => {
+      const id = getIdFromUrlString(memberUrl);
       if (!this.props.characters[id]) {
         this.props.fetchCharacter({ id });
       }
