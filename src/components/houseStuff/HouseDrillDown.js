@@ -49,10 +49,10 @@ class HouseDrillDown extends Component {
 
   handleBackClick = () => {
     const historyObj = this.props.appHistory[1];
-    if(historyObj.domain === "character"){
-      this.props.backSelectCharacter({id: historyObj.id});
-    } else if (historyObj.domain === "house"){
-      this.props.backSelectHouse({id: historyObj.id});
+    if (historyObj.domain === "character") {
+      this.props.backSelectCharacter({ id: historyObj.id });
+    } else if (historyObj.domain === "house") {
+      this.props.backSelectHouse({ id: historyObj.id });
     }
   }
 
@@ -63,8 +63,6 @@ class HouseDrillDown extends Component {
   };
 
   isLordLoaded = () => {
-    console.log(this.props);
-    
     return !!this.props.house.currentLord && this.getLordFromCharacters();
   };
 
@@ -157,8 +155,8 @@ const mapDispatchToProps = dispatch => {
     fetchCharacter: payload =>
       dispatch({ type: characterActions.FETCH_CHARACTER_START, payload }),
     closeDrillDown: () => dispatch({ type: generalActions.CLOSE_DRILL_DOWN }),
-    backSelectCharacter: payload => dispatch({type: characterActions.BACK_SELECT_CHARACTER, payload}),
-    backSelectHouse: payload => dispatch({type: houseActions.BACK_SELECT_HOUSE, payload})
+    backSelectCharacter: payload => dispatch({ type: characterActions.BACK_SELECT_CHARACTER, payload }),
+    backSelectHouse: payload => dispatch({ type: houseActions.BACK_SELECT_HOUSE, payload })
   };
 };
 export default connect(

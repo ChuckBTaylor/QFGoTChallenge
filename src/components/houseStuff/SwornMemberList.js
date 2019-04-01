@@ -7,7 +7,7 @@ const SwornMemberList = props => {
     props.onMemberClick(event.currentTarget.value);
   }
   const members = props.members.map(member => {
-    const clickable = props.characters[getIdFromUrlString(member.url)];
+    const clickable = !!props.characters[getIdFromUrlString(member.url)];
     const className = clickable ? "clickable" : "unclickable";
     const id = getIdFromUrlString(member.url);
     return (<li onClick={onMemberClick} className={className} value={id} key={generateListKey(listName, member)}>{member.name ? member.name : (member.aliases[0] + "*")}</li>)
