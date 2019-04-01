@@ -17,7 +17,7 @@ export function getIdFromUrlString(str) {
   return +splitObj[splitObj.length - 1];
 }
 
-export function generateListKey(listName, listItem) {
+export function generateListKey(listName, listItem){ 
   if (typeof listItem === 'string') {
     return `${listName}-${listItem}`;
   } else {

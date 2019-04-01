@@ -83,10 +83,6 @@ class HouseDrillDown extends Component {
     if (overlord) {
       overlordName = overlord.name;
     }
-    const members = this.props.house.swornMembers
-      .map(member => getIdFromUrlString(member))
-      .filter(id => !!this.props.characters[id])
-      .map(id => this.props.characters[id]);
     return (
       <div className="drill-down">
         <span className="drill-down-navigation" >
@@ -118,7 +114,7 @@ class HouseDrillDown extends Component {
         {this.props.house.swornMembers.length ? (
           <SwornMemberList
             onMemberClick={this.onMemberClick}
-            members={members}
+            members={this.props.house.swornMembers}
             characters={this.props.characters}
           />
         ) : (
