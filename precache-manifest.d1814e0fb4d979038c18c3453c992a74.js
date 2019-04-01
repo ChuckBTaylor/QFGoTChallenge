@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/QFGoTChallenge/static/js/runtime~main.16fb53f8.js"
   },
   {
-    "revision": "4c3d694b9f37dd25b2e1",
-    "url": "/QFGoTChallenge/static/js/main.a8acd244.chunk.js"
+    "revision": "cac0e4d0c8a9eeac04b0",
+    "url": "/QFGoTChallenge/static/js/main.857e531e.chunk.js"
   },
   {
     "revision": "5ccb57496b44256034e8",
     "url": "/QFGoTChallenge/static/js/2.8f4b5897.chunk.js"
   },
   {
-    "revision": "4c3d694b9f37dd25b2e1",
+    "revision": "cac0e4d0c8a9eeac04b0",
     "url": "/QFGoTChallenge/static/css/main.9a18235d.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/QFGoTChallenge/static/css/2.158a2283.chunk.css"
   },
   {
-    "revision": "f1d199a5af92f087b6330fa49aea6548",
+    "revision": "92f5779e2c42003f478adcda931f7b0d",
     "url": "/QFGoTChallenge/index.html"
   }
 ];
